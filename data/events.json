@@ -1,0 +1,71 @@
+[
+  {
+    "id": 1,
+    "name": "Business Events",
+    "slug": "events",
+    "description": "Professional networking and business development events",
+    "icon": "Calendar",
+    "upcoming": [
+      {
+        "id": 101,
+        "title": "Ankara Business Summit 2025",
+        "date": "2025-03-15",
+        "location": "Ankara Convention Center",
+        "description": "Annual business summit featuring industry leaders and networking opportunities"
+      },
+      {
+        "id": 102,
+        "title": "Innovation Workshop",
+        "date": "2025-02-20",
+        "location": "ODTU Technology Park",
+        "description": "Interactive workshop on business innovation and digital transformation"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Exhibitions",
+    "slug": "exhibitions",
+    "description": "Trade shows and industry exhibitions",
+    "icon": "Building",
+    "upcoming": [
+      {
+        "id": 201,
+        "title": "Turkey Manufacturing Expo",
+        "date": "2025-04-10",
+        "location": "Istanbul Expo Center",
+        "description": "Comprehensive manufacturing industry exhibition with latest technologies"
+      },
+      {
+        "id": 202,
+        "title": "Agricultural Technology Fair",
+        "date": "2025-05-05",
+        "location": "Ankara Fairground",
+        "description": "Modern agricultural technology and equipment showcase"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Business Tours",
+    "slug": "tours",
+    "description": "Educational business facility tours and visits",
+    "icon": "MapPin",
+    "upcoming": [
+      {
+        "id": 301,
+        "title": "Tech Company Tour - Ankara",
+        "date": "2025-02-28",
+        "location": "Various Tech Companies",
+        "description": "Guided tour of leading technology companies in Ankara"
+      },
+      {
+        "id": 302,
+        "title": "Industrial Zone Visit",
+        "date": "2025-03-25",
+        "location": "Ankara Industrial Zone",
+        "description": "Educational visit to manufacturing facilities and industrial operations"
+      }
+    ]
+  }
+]

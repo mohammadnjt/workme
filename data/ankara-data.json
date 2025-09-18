@@ -1,0 +1,25 @@
+{
+  "summary": "Ankara, the capital of Turkey, is a major economic hub with significant opportunities in various industries. The city offers strategic advantages for businesses with its central location, educated workforce, and government support for industrial development.",
+  "coordinates": [39.9334, 32.8597],
+  "advantages": {
+    "industryMining": "Ankara hosts numerous industrial complexes and mining operations, benefiting from proximity to natural resources and transportation networks. The city's industrial zones provide modern facilities and infrastructure for manufacturing and processing operations.",
+    "agriculture": "The region surrounding Ankara is known for agricultural production, particularly grains, livestock, and agricultural technology development. Modern farming techniques and research facilities support sustainable agricultural practices.",
+    "services": "As the capital city, Ankara offers extensive service sector opportunities including government services, education, healthcare, and professional services. The presence of universities and research institutions creates a knowledge-based service economy."
+  },
+  "priorityInvestments": "Priority investment areas in Ankara include technology and innovation, renewable energy projects, advanced manufacturing, healthcare services, educational institutions, and tourism infrastructure development.",
+  "economicSummary": "Ankara's economy is diversified across government services, manufacturing, agriculture, and emerging technology sectors. The city benefits from stable government employment, growing private sector investment, and strategic location for trade and logistics.",
+  "identifyingAnalyzingSystems": "The city employs modern business analysis systems including digital platforms for business registration, investment tracking, and economic development monitoring. These systems help identify opportunities and track business performance.",
+  "priorityFields": "Key priority fields include information technology, biotechnology, renewable energy, advanced manufacturing, agriculture technology, healthcare innovation, and educational services.",
+  "suggestedBusinesses": [
+    "Technology startups and software development companies",
+    "Agricultural technology and equipment suppliers",
+    "Renewable energy system providers",
+    "Healthcare and medical device companies",
+    "Educational technology platforms",
+    "Logistics and transportation services",
+    "Food processing and packaging businesses",
+    "Construction and real estate development",
+    "Tourism and hospitality services",
+    "Professional consulting services"
+  ]
+}

@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "name": "Recycling Industries",
+    "slug": "recycling",
+    "description": "Sustainable waste management and recycling solutions",
+    "image": "https://images.pexels.com/photos/3735218/pexels-photo-3735218.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "id": 2,
+    "name": "Plastic Industries",
+    "slug": "plastic",
+    "description": "Plastic manufacturing and processing solutions",
+    "image": "https://images.pexels.com/photos/3735746/pexels-photo-3735746.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "id": 3,
+    "name": "Automobile/Motorcycle/Boat",
+    "slug": "automotive",
+    "description": "Transportation vehicle manufacturing and services",
+    "image": "https://images.pexels.com/photos/3802510/pexels-photo-3802510.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "id": 4,
+    "name": "Cellulose/Clothing",
+    "slug": "textile",
+    "description": "Textile and clothing manufacturing industry",
+    "image": "https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "id": 5,
+    "name": "Pharmaceutical/Health",
+    "slug": "pharmaceutical",
+    "description": "Healthcare and pharmaceutical industry solutions",
+    "image": "https://images.pexels.com/photos/3786157/pexels-photo-3786157.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "id": 6,
+    "name": "Food Industry",
+    "slug": "food",
+    "description": "Food processing and manufacturing solutions",
+    "image": "https://images.pexels.com/photos/3735215/pexels-photo-3735215.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "id": 7,
+    "name": "Metal/Wood Industries",
+    "slug": "metal-wood",
+    "description": "Metal and wood processing manufacturing",
+    "image": "https://images.pexels.com/photos/3789888/pexels-photo-3789888.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "id": 8,
+    "name": "Mineral/Construction",
+    "slug": "construction",
+    "description": "Construction and mineral processing industries",
+    "image": "https://images.pexels.com/photos/3760529/pexels-photo-3760529.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "id": 9,
+    "name": "Agricultural/Animal Husbandry/Fisheries",
+    "slug": "agriculture",
+    "description": "Agricultural and livestock management solutions",
+    "image": "https://images.pexels.com/photos/3735709/pexels-photo-3735709.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "id": 10,
+    "name": "Tourism/Recreation/Service",
+    "slug": "tourism",
+    "description": "Tourism and recreational service industries",
+    "image": "https://images.pexels.com/photos/3771787/pexels-photo-3771787.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "id": 11,
+    "name": "Online Businesses",
+    "slug": "online",
+    "description": "Digital business and e-commerce solutions",
+    "image": "https://images.pexels.com/photos/3747132/pexels-photo-3747132.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "id": 12,
+    "name": "Chemical/Petrochemical",
+    "slug": "chemical",
+    "description": "Chemical and petrochemical industry solutions",
+    "image": "https://images.pexels.com/photos/3735778/pexels-photo-3735778.jpeg?auto=compress&cs=tinysrgb&w=600"
+  },
+  {
+    "id": 13,
+    "name": "Information Technology",
+    "slug": "it",
+    "description": "Technology and software development solutions",
+    "image": "https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=600"
+  }
+]

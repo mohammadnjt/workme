@@ -1,0 +1,117 @@
+import type { Config } from 'tailwindcss';
+
+const config: Config = {
+  darkMode: ['class'],
+  content: [
+    './pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          DEFAULT: '#FF6B35',
+          50: '#FFF4F0',
+          100: '#FFE9E0',
+          200: '#FFD3C1',
+          300: '#FFBD92',
+          400: '#FF9563',
+          500: '#FF6B35',
+          600: '#E5552A',
+          700: '#CC4A26',
+          800: '#B23F22',
+          900: '#99341D',
+        },
+        secondary: {
+          DEFAULT: '#2C3E50',
+          50: '#F8F9FA',
+          100: '#E9ECEF',
+          200: '#D3D9DF',
+          300: '#BCC5CF',
+          400: '#8A97A5',
+          500: '#58677B',
+          600: '#4A5870',
+          700: '#3C4965',
+          800: '#2C3E50',
+          900: '#24323F',
+        },
+        accent: {
+          DEFAULT: '#3498DB',
+          50: '#EBF8FF',
+          100: '#D1EEFC',
+          200: '#A7D8F0',
+          300: '#7CC1E4',
+          400: '#52AAD8',
+          500: '#3498DB',
+          600: '#2E86C1',
+          700: '#2874A6',
+          800: '#21618C',
+          900: '#1B4F72',
+        },
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
+        card: {
+          DEFAULT: 'hsl(var(--card))',
+          foreground: 'hsl(var(--card-foreground))',
+        },
+        popover: {
+          DEFAULT: 'hsl(var(--popover))',
+          foreground: 'hsl(var(--popover-foreground))',
+        },
+        muted: {
+          DEFAULT: 'hsl(var(--muted))',
+          foreground: 'hsl(var(--muted-foreground))',
+        },
+        destructive: {
+          DEFAULT: 'hsl(var(--destructive))',
+          foreground: 'hsl(var(--destructive-foreground))',
+        },
+        border: 'hsl(var(--border))',
+        input: 'hsl(var(--input))',
+        ring: 'hsl(var(--ring))',
+        chart: {
+          '1': 'hsl(var(--chart-1))',
+          '2': 'hsl(var(--chart-2))',
+          '3': 'hsl(var(--chart-3))',
+          '4': 'hsl(var(--chart-4))',
+          '5': 'hsl(var(--chart-5))',
+        },
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'gradient-conic':
+          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      },
+      borderRadius: {
+        lg: 'var(--radius)',
+        md: 'calc(var(--radius) - 2px)',
+        sm: 'calc(var(--radius) - 4px)',
+      },
+      keyframes: {
+        'accordion-down': {
+          from: {
+            height: '0',
+          },
+          to: {
+            height: 'var(--radix-accordion-content-height)',
+          },
+        },
+        'accordion-up': {
+          from: {
+            height: 'var(--radix-accordion-content-height)',
+          },
+          to: {
+            height: '0',
+          },
+        },
+      },
+      animation: {
+        'accordion-down': 'accordion-down 0.2s ease-out',
+        'accordion-up': 'accordion-up 0.2s ease-out',
+      },
+    },
+  },
+  plugins: [require('tailwindcss-animate')],
+};
+export default config;

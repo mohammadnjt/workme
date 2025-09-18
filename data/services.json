@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Business Consulting",
+    "slug": "consulting",
+    "description": "Expert business strategy and operational consulting services",
+    "icon": "Briefcase",
+    "features": ["Strategic Planning", "Market Analysis", "Process Optimization", "Growth Strategies"]
+  },
+  {
+    "id": 2,
+    "name": "Training & Development",
+    "slug": "training",
+    "description": "Professional training programs for skill development",
+    "icon": "GraduationCap",
+    "features": ["Skills Training", "Leadership Development", "Technical Courses", "Certification Programs"]
+  },
+  {
+    "id": 3,
+    "name": "Capital Financing",
+    "slug": "financing",
+    "description": "Financial solutions and investment opportunities",
+    "icon": "DollarSign",
+    "features": ["Investment Funding", "Loan Services", "Financial Planning", "Investor Matching"]
+  },
+  {
+    "id": 4,
+    "name": "Management & Supervision",
+    "slug": "management",
+    "description": "Professional management and supervisory services",
+    "icon": "Users",
+    "features": ["Project Management", "Quality Control", "Team Leadership", "Performance Monitoring"]
+  },
+  {
+    "id": 5,
+    "name": "Supply of Equipment & Raw Materials",
+    "slug": "supply",
+    "description": "Equipment procurement and raw material supply chain",
+    "icon": "Package",
+    "features": ["Equipment Sourcing", "Material Supply", "Inventory Management", "Vendor Relations"]
+  },
+  {
+    "id": 6,
+    "name": "Marketing & Sales",
+    "slug": "marketing",
+    "description": "Comprehensive marketing and sales solutions",
+    "icon": "TrendingUp",
+    "features": ["Digital Marketing", "Sales Strategy", "Brand Development", "Customer Acquisition"]
+  },
+  {
+    "id": 7,
+    "name": "Workme Competition",
+    "slug": "competition",
+    "description": "Business competition and innovation challenges",
+    "icon": "Trophy",
+    "features": ["Innovation Contests", "Startup Competitions", "Networking Events", "Prize Awards"]
+  }
+]
