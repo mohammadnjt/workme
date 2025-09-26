@@ -81,7 +81,7 @@ const FloatingAdminMenu = () => {
   if(user.role !== 'admin') return null;
 
   return (
-    <div className="fixed top-1/3 inset-0 pointer-events-none">
+    <div className="fixed top-1/3 inset-0 pointer-events-none z-50">
     <Draggable defaultClassName='' position={position} onStop={handleDrag} bounds={{ left: 0, top: 0, right: window.innerWidth - 48, bottom: window.innerHeight - 48 }}>
       <div
         className={`relative w-[300px] h-[300px] ${isOpen ? 'active' : ''}`}
