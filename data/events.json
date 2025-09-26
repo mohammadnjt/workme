@@ -2,7 +2,7 @@
   {
     "id": 1,
     "name": "Business Events",
-    "slug": "events",
+    "slug": "event",
     "description": "Professional networking and business development events",
     "icon": "Calendar",
     "upcoming": [
@@ -25,7 +25,7 @@
   {
     "id": 2,
     "name": "Exhibitions",
-    "slug": "exhibitions",
+    "slug": "exhibition",
     "description": "Trade shows and industry exhibitions",
     "icon": "Building",
     "upcoming": [
@@ -48,7 +48,7 @@
   {
     "id": 3,
     "name": "Business Tours",
-    "slug": "tours",
+    "slug": "business_tour",
     "description": "Educational business facility tours and visits",
     "icon": "MapPin",
     "upcoming": [

@@ -1,15 +1,20 @@
+// "use client";
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/components/theme-provider';
+import { ToastProvider } from '@/components/ToastProvider';
+import FloatingAdminMenu from './admin/FloatingAdminMenu';
 
 const inter = Inter({ subsets: ['latin'] });
 
+console.log('process.env.NEXT_PUBLIC_SITE_URL',process.env.NEXT_PUBLIC_SITE_URL)
 export const metadata: Metadata = {
   title: {
     template: '%s | Work ME',
     default: 'Work ME - Business Discovery Platform for Turkey',
   },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
   description: 'Discover and connect with businesses, services, and opportunities across Turkey. Find your ideal business type, access services, events, and research on Work ME platform.',
   keywords: ['business', 'Turkey', 'Ankara', 'services', 'events', 'research', 'entrepreneurship'],
   authors: [{ name: 'Work ME Team' }],
@@ -48,6 +53,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
@@ -64,7 +70,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <ToastProvider>
           {children}
+          <FloatingAdminMenu />
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>

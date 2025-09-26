@@ -10,6 +10,12 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import ankaraData from '@/data/ankara-data.json';
+// import TurkeyStates from 'turkey-district-maps-3';
+// import { Istanbul, Ankara } from 'turkey-district-maps-3';
+import TurkeyMap from 'turkey-map-react';
+import { Button } from './ui/button';
+
+// import {MapContainer, TileLayer,Marker, Popup } from 'react-leaflet';
 
 // Dynamic import of map components to avoid SSR issues
 const MapContainer = dynamic(() => import('react-leaflet').then(mod => mod.MapContainer), { ssr: false });
@@ -19,6 +25,7 @@ const Popup = dynamic(() => import('react-leaflet').then(mod => mod.Popup), { ss
 
 const BusinessMap = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [province, setProvince] = useState<any>(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
   // Turkey center coordinates
@@ -33,10 +40,50 @@ const BusinessMap = () => {
     setIsMapLoaded(true);
   };
 
+  const blh = (name:any) => {
+    const TurkeyStates = require('turkey-district-maps-3');
+
+    console.log('TurkeyStates',TurkeyStates[name])
+    const CityComponent = TurkeyStates[name];
+
+    console.log('ankara', )
+    setProvince(<CityComponent onClick={({ name }) => console.log(name + ' is just clicked!')} />)
+    // for (const key of Object.keys(TurkeyStates)) {
+    //   console.log('key', key)
+    //   const value2 = TurkeyStates[key];
+    //   console.log('value2', value2)
+    //   const value = TurkeyStates[name];
+    //   console.log('value', value)
+      // if (value && typeof value === 'object') {
+      //   // اگر مقدار داخل کلید برابر با شهر باشد
+      //   if (key.toLowerCase() === cityName.toLowerCase()) {
+      //     return value;
+      //   }
+      //   // یا اگر داخل value یک property به نام cityName باشد
+      //   if (Object.prototype.hasOwnProperty.call(value, cityName)) {
+      //     return value[cityName];
+      //   }
+      // }
+    // }
+  }
+
   return (
     <>
-      <div className="w-full h-96 bg-gray-200 rounded-lg overflow-hidden">
-        {typeof window !== 'undefined' && (
+      <div className="w-full h-100 bg-gray-200 rounded-lg overflow-hidden">
+        {province && <Button onClick={() => setProvince('')}>Show provinces</Button>}
+        {province ||  
+        // <Ankara onClick={({ name }) => console.log(name + ' is just clicked!')} />:
+         <TurkeyMap  
+          hoverable={true}
+          onClick={ ({ plateNumber, name }) => {
+            console.log("Cursor is over on " + plateNumber + " - " + name)
+            // setProvince(name);
+            blh(name);
+          } }
+        />
+        }
+        {/* <Ankara onClick={({ name }) => console.log(name + ' is just clicked!')} /> */}
+        {/* {typeof window !== 'undefined' && (
           <MapContainer
             center={turkeyCenter}
             zoom={6}
@@ -58,7 +105,9 @@ const BusinessMap = () => {
                 <div className="text-center">
                   <h3 className="font-semibold">Ankara</h3>
                   <p className="text-sm text-gray-600">Capital of Turkey</p>
-                  <p className="text-xs text-primary cursor-pointer" onClick={handleMarkerClick}>
+                  <p className="text-xs text-primary cursor-pointer" 
+                  // onClick={handleMarkerClick}
+                  >
                     Click for detailed information
                   </p>
                 </div>
@@ -66,15 +115,15 @@ const BusinessMap = () => {
             </Marker>
           </MapContainer>
         )}
-        
-        {!isMapLoaded && (
+         */}
+        {/* {!isMapLoaded && (
           <div className="w-full h-full flex items-center justify-center bg-gray-200">
             <div className="text-center">
               <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
               <p className="text-gray-600">Loading map...</p>
             </div>
           </div>
-        )}
+        )} */}
       </div>
 
       {/* Ankara Information Modal */}

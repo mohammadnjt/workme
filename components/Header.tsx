@@ -1,20 +1,12 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
-import { 
-  Menu, 
-  X, 
-  Bell, 
-  Mail, 
-  User, 
-  Globe, 
-  Sun, 
-  Moon,
-  ChevronDown
-} from 'lucide-react';
+import ImageISLIO from '../assets/img/ISLIO-Blue.png';
+import { Menu, X, Bell, Mail, User, Globe, ChevronDown, Sun, Moon } from 'lucide-react';
+import Image from 'next/image';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,19 +14,16 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useTheme } from 'next-themes';
+import { useDataStore } from '@/store/dataStore';
 
-const WorkMeLogo = () => (
-  <div className="flex items-center space-x-2">
-    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-      <div className="text-white font-bold text-lg">W</div>
-    </div>
-    <h1 className="text-2xl font-bold text-primary">Work ME</h1>
-  </div>
-);
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
+  const { user } = useDataStore();
+  const { clearUser } = useDataStore.getState();
+
   const { setTheme, theme } = useTheme();
 
   const navItems = [
@@ -47,14 +36,20 @@ const Header = () => {
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
 
+  const logout = () => {
+    localStorage.removeItem('accessToken')
+    clearUser();
+    router.push('/auth/signin');
+  }
+
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-md border-b">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-primary-50/95 dark:bg-secondary-900/95 backdrop-blur-sm shadow-md border-b border-primary-200 dark:border-secondary-700 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
-              <WorkMeLogo />
+            <Link href="/" className="flex-shrink-0 relative -top-1">
+              <Image src={ImageISLIO} alt="ISLIO" width={100} height={30} />
             </Link>
 
             {/* Desktop Navigation */}
@@ -62,17 +57,17 @@ const Header = () => {
               <ul className="flex items-center space-x-8">
                 {navItems.map((item) => (
                   <li key={item.name}>
-                    <Link 
+                    <Link
                       href={item.href}
-                      className={`text-sm font-medium transition-colors hover:text-primary relative ${
-                        isActive(item.href) 
-                          ? 'text-primary' 
-                          : 'text-gray-700 hover:text-primary'
+                      className={`text-sm font-medium transition-colors relative ${
+                        isActive(item.href)
+                          ? 'text-primary-500 dark:text-primary-300'
+                          : 'text-secondary-800 dark:text-secondary-200 hover:text-primary-400 dark:hover:text-primary-200'
                       }`}
                     >
                       {item.name}
                       {isActive(item.href) && (
-                        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary"></span>
+                        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-primary-500 dark:bg-primary-300"></span>
                       )}
                     </Link>
                   </li>
@@ -83,28 +78,44 @@ const Header = () => {
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center space-x-4">
               {/* Notifications */}
-              <Button variant="ghost" size="sm" className="relative">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="relative text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800"
+              >
                 <Bell className="h-5 w-5" />
-                <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>
+                <span className="absolute -top-1 -right-1 w-3 h-3 bg-accent-500 dark:bg-accent-400 rounded-full"></span>
               </Button>
 
               {/* Messages */}
-              <Button variant="ghost" size="sm">
+              {/* <Button
+                variant="ghost"
+                size="sm"
+                className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800"
+              >
                 <Mail className="h-5 w-5" />
-              </Button>
+              </Button> */}
 
               {/* Language Selector */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="flex items-center space-x-1">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="flex items-center space-x-1 text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                  >
                     <Globe className="h-4 w-4" />
                     <span className="text-sm">Türkiye</span>
                     <ChevronDown className="h-3 w-3" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  <DropdownMenuItem>Türkiye</DropdownMenuItem>
-                  <DropdownMenuItem>English</DropdownMenuItem>
+                <DropdownMenuContent className="bg-white dark:bg-secondary-900 border border-primary-200 dark:border-secondary-700">
+                  <DropdownMenuItem className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800">
+                    Türkiye
+                  </DropdownMenuItem>
+                  <DropdownMenuItem className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800">
+                    English
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
 
@@ -113,42 +124,70 @@ const Header = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800"
               >
                 <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               </Button>
 
-              {/* Profile */}
-              <DropdownMenu>
+              {/* Profile */}{/* Auth Buttons */}
+              {user && user.id ? <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                  >
                     <User className="h-5 w-5" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
+                <DropdownMenuContent className="bg-white dark:bg-secondary-900 border border-primary-200 dark:border-secondary-700">
                   <DropdownMenuItem asChild>
-                    <Link href="/register">Register</Link>
+                    <Link
+                      href="/auth/profile"
+                      className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                    >
+                      Profile
+                    </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href="/signin">Sign In</Link>
+                    <div
+                      // href="/auth/signin"
+                      onClick={logout}
+                      className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                    >
+                      Logout
+                    </div>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
-              </DropdownMenu>
+              </DropdownMenu> : 
+              <>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  asChild
+                  className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                >
+                  <Link href="/auth/signin">Sign In</Link>
+                </Button>
+                <Button
+                  size="sm"
+                  asChild
+                  className="bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
+                >
+                  <Link href="/auth/register">Register</Link>
+                </Button>
+              </>
+              }
 
-              {/* Auth Buttons */}
-              <Button variant="outline" size="sm" asChild>
-                <Link href="/signin">Sign In</Link>
-              </Button>
-              <Button size="sm" asChild>
-                <Link href="/register">Register</Link>
-              </Button>
+              
             </div>
 
             {/* Mobile Menu Button */}
             <Button
               variant="ghost"
               size="sm"
-              className="lg:hidden"
+              className="lg:hidden text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle mobile menu"
             >
@@ -165,8 +204,11 @@ const Header = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">
-          <div className="fixed inset-0 bg-black/50" onClick={() => setIsMobileMenuOpen(false)} />
-          <div className="fixed top-16 right-0 bottom-0 w-64 bg-white shadow-xl">
+          <div
+            className="fixed inset-0 bg-black/50"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          <div className="fixed top-16 right-0 bottom-0 w-64 bg-primary-50 dark:bg-secondary-900 shadow-xl border-l border-primary-200 dark:border-secondary-700">
             <div className="p-6">
               <nav className="space-y-4">
                 {navItems.map((item) => (
@@ -175,8 +217,8 @@ const Header = () => {
                     href={item.href}
                     className={`block py-2 px-4 rounded-md text-sm font-medium transition-colors ${
                       isActive(item.href)
-                        ? 'bg-primary text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
+                        ? 'bg-primary-500 dark:bg-primary-600 text-white'
+                        : 'text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800'
                     }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
@@ -185,22 +227,31 @@ const Header = () => {
                 ))}
               </nav>
 
-              <div className="mt-6 pt-6 border-t space-y-4">
-                <Button variant="outline" className="w-full" asChild>
-                  <Link href="/signin">Sign In</Link>
+              <div className="mt-6 pt-6 border-t border-primary-200 dark:border-secondary-700 space-y-4">
+                <Button
+                  variant="outline"
+                  className="w-full border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                  asChild
+                >
+                  <Link href="/auth/signin">Sign In</Link>
                 </Button>
-                <Button className="w-full" asChild>
-                  <Link href="/register">Register</Link>
+                <Button
+                  className="w-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
+                  asChild
+                >
+                  
+                  <Link href="/auth/register">Register</Link>
                 </Button>
               </div>
 
-              <div className="mt-6 pt-6 border-t">
+              <div className="mt-6 pt-6 border-t border-primary-200 dark:border-secondary-700">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-700">Theme</span>
+                  <span className="text-sm text-secondary-800 dark:text-secondary-200">Theme</span>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                    className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800"
                   >
                     <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                     <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />

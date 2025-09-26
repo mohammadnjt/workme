@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
@@ -23,27 +23,27 @@ function SearchResults() {
 
     // Add matching categories
     if (business) {
-      const matchingCategories = categoriesData.filter(category => 
+      const matchingCategories = categoriesData.filter((category) =>
         category.name.toLowerCase().includes(business.toLowerCase()) ||
         category.description.toLowerCase().includes(business.toLowerCase())
       );
-      results.push(...matchingCategories.map(cat => ({ ...cat, type: 'category' })));
+      results.push(...matchingCategories.map((cat) => ({ ...cat, type: 'category' })));
     }
 
     // Add matching services
     if (business) {
-      const matchingServices = servicesData.filter(service => 
+      const matchingServices = servicesData.filter((service) =>
         service.name.toLowerCase().includes(business.toLowerCase()) ||
         service.description.toLowerCase().includes(business.toLowerCase())
       );
-      results.push(...matchingServices.map(serv => ({ ...serv, type: 'service' })));
+      results.push(...matchingServices.map((serv) => ({ ...serv, type: 'service' })));
     }
 
     // If no specific matches, return some default results
     if (results.length === 0) {
       results.push(
-        ...categoriesData.slice(0, 3).map(cat => ({ ...cat, type: 'category' })),
-        ...servicesData.slice(0, 2).map(serv => ({ ...serv, type: 'service' }))
+        ...categoriesData.slice(0, 3).map((cat) => ({ ...cat, type: 'category' })),
+        ...servicesData.slice(0, 2).map((serv) => ({ ...serv, type: 'service' }))
       );
     }
 
@@ -53,37 +53,37 @@ function SearchResults() {
   const searchResults = getSearchResults();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-primary-50 dark:bg-primary-900 text-secondary-800 dark:text-secondary-200 transition-colors duration-300">
       <Header />
-      
+
       <main className="pt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Search Summary */}
-          <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
+          <div className="bg-white dark:bg-secondary-900 rounded-lg shadow-sm border border-primary-200 dark:border-secondary-700 p-6 mb-8">
             <div className="flex items-center space-x-2 mb-4">
-              <Search className="h-5 w-5 text-primary" />
-              <h1 className="text-2xl font-bold text-gray-900">Search Results</h1>
+              <Search className="h-5 w-5 text-primary-500 dark:text-primary-300" />
+              <h1 className="text-2xl font-bold text-secondary-800 dark:text-secondary-200">Search Results</h1>
             </div>
-            
+
             <div className="space-y-2">
               {country && (
-                <p className="text-gray-600">
+                <p className="text-secondary-600 dark:text-secondary-400">
                   <span className="font-medium">Country:</span> {country}
                 </p>
               )}
               {city && (
-                <p className="text-gray-600">
+                <p className="text-secondary-600 dark:text-secondary-400">
                   <span className="font-medium">City:</span> {city}
                 </p>
               )}
               {business && (
-                <p className="text-gray-600">
+                <p className="text-secondary-600 dark:text-secondary-400">
                   <span className="font-medium">Business Type:</span> {business}
                 </p>
               )}
             </div>
 
-            <p className="text-sm text-gray-500 mt-4">
+            <p className="text-sm text-secondary-500 dark:text-secondary-400 mt-4">
               Found {searchResults.length} results matching your criteria
             </p>
           </div>
@@ -91,19 +91,35 @@ function SearchResults() {
           {/* Filters */}
           <div className="flex flex-wrap items-center gap-4 mb-6">
             <div className="flex items-center space-x-2">
-              <Filter className="h-4 w-4 text-gray-500" />
-              <span className="text-sm font-medium text-gray-700">Filter by:</span>
+              <Filter className="h-4 w-4 text-secondary-500 dark:text-secondary-400" />
+              <span className="text-sm font-medium text-secondary-700 dark:text-secondary-300">Filter by:</span>
             </div>
-            <Button variant="outline" size="sm">
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+            >
               All Types
             </Button>
-            <Button variant="outline" size="sm">
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+            >
               Business Categories
             </Button>
-            <Button variant="outline" size="sm">
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+            >
               Services
             </Button>
-            <Button variant="outline" size="sm">
+            <Button
+              variant="outline"
+              size="sm"
+              className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+            >
               Location
             </Button>
           </div>
@@ -111,34 +127,47 @@ function SearchResults() {
           {/* Search Results */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {searchResults.map((result) => (
-              <Card key={`${result.type}-${result.id}`} className="hover:shadow-md transition-shadow duration-300">
+              <Card
+                key={`${result.type}-${result.id}`}
+                className="bg-white dark:bg-secondary-900 border-primary-200 dark:border-secondary-700 hover:shadow-md transition-shadow duration-300"
+              >
                 <CardHeader className="pb-4">
                   <div className="flex items-start justify-between">
-                    <Badge variant={result.type === 'category' ? 'default' : 'secondary'}>
+                    <Badge
+                      variant={result.type === 'category' ? 'default' : 'secondary'}
+                      className={
+                        result.type === 'category'
+                          ? 'bg-primary-500 dark:bg-primary-600 text-white'
+                          : 'bg-secondary-200 dark:bg-secondary-700 text-secondary-800 dark:text-secondary-200'
+                      }
+                    >
                       {result.type === 'category' ? 'Business Category' : 'Service'}
                     </Badge>
                     {result.type === 'category' ? (
-                      <Building className="h-5 w-5 text-primary" />
+                      <Building className="h-5 w-5 text-primary-500 dark:text-primary-300" />
                     ) : (
-                      <Search className="h-5 w-5 text-accent" />
+                      <Search className="h-5 w-5 text-accent-500 dark:text-accent-400" />
                     )}
                   </div>
-                  <CardTitle className="text-lg">{result.name}</CardTitle>
+                  <CardTitle className="text-lg text-secondary-800 dark:text-secondary-200">{result.name}</CardTitle>
                 </CardHeader>
-                
+
                 <CardContent>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                  <p className="text-secondary-600 dark:text-secondary-400 text-sm mb-4 line-clamp-3">
                     {result.description}
                   </p>
-                  
+
                   {city && (
-                    <div className="flex items-center text-sm text-gray-500 mb-4">
+                    <div className="flex items-center text-sm text-secondary-500 dark:text-secondary-400 mb-4">
                       <MapPin className="h-4 w-4 mr-1" />
                       <span>Available in {city}</span>
                     </div>
                   )}
-                  
-                  <Button size="sm" className="w-full">
+
+                  <Button
+                    size="sm"
+                    className="w-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
+                  >
                     {result.type === 'category' ? 'Explore Category' : 'View Service'}
                   </Button>
                 </CardContent>
@@ -149,18 +178,21 @@ function SearchResults() {
           {/* No Results State */}
           {searchResults.length === 0 && (
             <div className="text-center py-12">
-              <Search className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-              <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+              <Search className="h-16 w-16 text-secondary-300 dark:text-secondary-600 mx-auto mb-4" />
+              <h2 className="text-2xl font-semibold text-secondary-800 dark:text-secondary-200 mb-2">
                 No results found
               </h2>
-              <p className="text-gray-600 mb-6">
+              <p className="text-secondary-600 dark:text-secondary-400 mb-6">
                 Try adjusting your search criteria or explore our categories and services.
               </p>
               <div className="space-x-4">
-                <Button variant="outline">
+                <Button
+                  variant="outline"
+                  className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                >
                   View All Categories
                 </Button>
-                <Button>
+                <Button className="bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700">
                   Browse Services
                 </Button>
               </div>
@@ -168,28 +200,36 @@ function SearchResults() {
           )}
 
           {/* Suggestions */}
-          <div className="mt-12 bg-white rounded-lg shadow-sm border p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-4">
+          <div className="mt-12 bg-white dark:bg-secondary-900 rounded-lg shadow-sm border border-primary-200 dark:border-secondary-700 p-6">
+            <h2 className="text-xl font-semibold text-secondary-800 dark:text-secondary-200 mb-4">
               You might also be interested in
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <h3 className="font-medium text-gray-900 mb-2">Business Information Form</h3>
-                <p className="text-sm text-gray-600 mb-3">
+              <div className="p-4 bg-primary-50 dark:bg-secondary-800 rounded-lg">
+                <h3 className="font-medium text-secondary-800 dark:text-secondary-200 mb-2">Business Information Form</h3>
+                <p className="text-sm text-secondary-600 dark:text-secondary-400 mb-3">
                   Get detailed guidance for your business idea with our comprehensive form.
                 </p>
-                <Button size="sm" variant="outline">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                >
                   Fill Out Form
                 </Button>
               </div>
-              
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <h3 className="font-medium text-gray-900 mb-2">Upcoming Events</h3>
-                <p className="text-sm text-gray-600 mb-3">
+
+              <div className="p-4 bg-primary-50 dark:bg-secondary-800 rounded-lg">
+                <h3 className="font-medium text-secondary-800 dark:text-secondary-200 mb-2">Upcoming Events</h3>
+                <p className="text-sm text-secondary-600 dark:text-secondary-400 mb-3">
                   Network with other entrepreneurs at our business events and exhibitions.
                 </p>
-                <Button size="sm" variant="outline">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                >
                   View Events
                 </Button>
               </div>
@@ -205,14 +245,16 @@ function SearchResults() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
-          <p className="text-gray-600">Loading search results...</p>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-primary-50 dark:bg-primary-900 flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-8 h-8 border-4 border-primary-500 dark:border-primary-300 border-t-transparent rounded-full animate-spin mx-auto mb-2"></div>
+            <p className="text-secondary-600 dark:text-secondary-400">Loading search results...</p>
+          </div>
         </div>
-      </div>
-    }>
+      }
+    >
       <SearchResults />
     </Suspense>
   );

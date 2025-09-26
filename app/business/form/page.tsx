@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
@@ -165,904 +165,1009 @@ export default function BusinessFormPage() {
   const totalSteps = 8;
 
   const renderStepContent = () => {
-    switch (step) {
-      case 1:
-        return (
-          <div className="form-section">
-            <h3>Basic Business Information</h3>
-            
+  switch (step) {
+    case 1:
+      return (
+        <div className="form-section bg-white dark:bg-secondary-900 p-6 rounded-lg border border-primary-200 dark:border-secondary-700">
+          <h3 className="text-xl font-semibold text-secondary-800 dark:text-secondary-200 mb-4">Basic Business Information</h3>
+
+          <FormField
+            control={form.control}
+            name="businessName"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Business Name *</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Enter your business name"
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="businessBrief"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Business Brief *</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Provide a brief description of your business"
+                    rows={4}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+        </div>
+      );
+
+    case 2:
+      return (
+        <div className="form-section bg-white dark:bg-secondary-900 p-6 rounded-lg border border-primary-200 dark:border-secondary-700">
+          <h3 className="text-xl font-semibold text-secondary-800 dark:text-secondary-200 mb-4">Skills and Training Requirements</h3>
+
+          <div>
+            <FormLabel className="text-secondary-800 dark:text-secondary-200">Skills Required *</FormLabel>
+            <div className="flex gap-2 mb-2">
+              <Input
+                placeholder="Add a skill"
+                value={newSkill}
+                onChange={(e) => setNewSkill(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addSkill())}
+                className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+              />
+              <Button
+                type="button"
+                onClick={addSkill}
+                className="bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
+              >
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
+            <div className="flex flex-wrap gap-2 mb-4">
+              {selectedSkills.map((skill) => (
+                <Badge
+                  key={skill}
+                  variant="secondary"
+                  className="flex items-center gap-1 bg-primary-100 dark:bg-secondary-800 text-secondary-700 dark:text-secondary-300"
+                >
+                  {skill}
+                  <button
+                    type="button"
+                    onClick={() => removeSkill(skill)}
+                    className="ml-1 hover:text-red-500 dark:hover:text-red-400"
+                  >
+                    <Minus className="h-3 w-3" />
+                  </button>
+                </Badge>
+              ))}
+            </div>
+          </div>
+
+          <FormField
+            control={form.control}
+            name="expertiseLevel"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Expertise Level *</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300">
+                      <SelectValue placeholder="Select expertise level" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white dark:bg-secondary-900 border-primary-200 dark:border-secondary-700">
+                    <SelectItem value="Elementary" className="text-secondary-800 dark:text-secondary-200">Elementary</SelectItem>
+                    <SelectItem value="Intermediate" className="text-secondary-800 dark:text-secondary-200">Intermediate</SelectItem>
+                    <SelectItem value="Advanced" className="text-secondary-800 dark:text-secondary-200">Advanced</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <FormField
               control={form.control}
-              name="businessName"
+              name="trainingHours"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Business Name *</FormLabel>
+                  <FormLabel className="text-secondary-800 dark:text-secondary-200">Training Hours</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your business name" {...field} />
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500 dark:text-red-400" />
                 </FormItem>
               )}
             />
 
             <FormField
               control={form.control}
-              name="businessBrief"
+              name="trainingDays"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Business Brief *</FormLabel>
+                  <FormLabel className="text-secondary-800 dark:text-secondary-200">Training Days</FormLabel>
                   <FormControl>
-                    <Textarea 
-                      placeholder="Provide a brief description of your business" 
-                      rows={4}
-                      {...field} 
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500 dark:text-red-400" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="trainingMonths"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-secondary-800 dark:text-secondary-200">Training Months</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-500 dark:text-red-400" />
                 </FormItem>
               )}
             />
           </div>
-        );
+        </div>
+      );
 
-      case 2:
-        return (
-          <div className="form-section">
-            <h3>Skills and Training Requirements</h3>
-            
-            <div>
-              <FormLabel>Skills Required *</FormLabel>
-              <div className="flex gap-2 mb-2">
-                <Input
-                  placeholder="Add a skill"
-                  value={newSkill}
-                  onChange={(e) => setNewSkill(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addSkill())}
-                />
-                <Button type="button" onClick={addSkill}>
-                  <Plus className="h-4 w-4" />
-                </Button>
-              </div>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {selectedSkills.map((skill) => (
-                  <Badge key={skill} variant="secondary" className="flex items-center gap-1">
-                    {skill}
-                    <button
-                      type="button"
-                      onClick={() => removeSkill(skill)}
-                      className="ml-1 hover:text-red-500"
-                    >
-                      <Minus className="h-3 w-3" />
-                    </button>
-                  </Badge>
-                ))}
-              </div>
-            </div>
+    case 3:
+      return (
+        <div className="form-section bg-white dark:bg-secondary-900 p-6 rounded-lg border border-primary-200 dark:border-secondary-700">
+          <h3 className="text-xl font-semibold text-secondary-800 dark:text-secondary-200 mb-4">Education and Qualifications</h3>
 
+          <FormField
+            control={form.control}
+            name="educationLevel"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Education Level *</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g., High School, Bachelor's, Master's"
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="qualifications"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Additional Qualifications</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="List any additional qualifications, certifications, or licenses"
+                    rows={3}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="experienceSkills"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Experience & Skills</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Describe relevant experience and skills"
+                    rows={3}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="healthSafety"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Health & Safety Requirements</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Describe any health and safety requirements or considerations"
+                    rows={3}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+        </div>
+      );
+
+    case 4:
+      return (
+        <div className="form-section bg-white dark:bg-secondary-900 p-6 rounded-lg border border-primary-200 dark:border-secondary-700">
+          <h3 className="text-xl font-semibold text-secondary-800 dark:text-secondary-200 mb-4">Capital and Equipment Requirements</h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField
               control={form.control}
-              name="expertiseLevel"
+              name="fixedCapital"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Expertise Level *</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select expertise level" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="Elementary">Elementary</SelectItem>
-                      <SelectItem value="Intermediate">Intermediate</SelectItem>
-                      <SelectItem value="Advanced">Advanced</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <FormField
-                control={form.control}
-                name="trainingHours"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Training Hours</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        placeholder="0" 
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="trainingDays"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Training Days</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        placeholder="0" 
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="trainingMonths"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Training Months</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        placeholder="0" 
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-        );
-
-      case 3:
-        return (
-          <div className="form-section">
-            <h3>Education and Qualifications</h3>
-            
-            <FormField
-              control={form.control}
-              name="educationLevel"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Education Level *</FormLabel>
+                  <FormLabel className="text-secondary-800 dark:text-secondary-200">Fixed Capital (TL) *</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., High School, Bachelor's, Master's" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="qualifications"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Additional Qualifications</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="List any additional qualifications, certifications, or licenses"
-                      rows={3}
-                      {...field} 
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500 dark:text-red-400" />
                 </FormItem>
               )}
             />
 
             <FormField
               control={form.control}
-              name="experienceSkills"
+              name="workingCapital"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Experience & Skills</FormLabel>
+                  <FormLabel className="text-secondary-800 dark:text-secondary-200">Working Capital (TL) *</FormLabel>
                   <FormControl>
-                    <Textarea 
-                      placeholder="Describe relevant experience and skills"
-                      rows={3}
-                      {...field} 
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="healthSafety"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Health & Safety Requirements</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="Describe any health and safety requirements or considerations"
-                      rows={3}
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500 dark:text-red-400" />
                 </FormItem>
               )}
             />
           </div>
-        );
 
-      case 4:
-        return (
-          <div className="form-section">
-            <h3>Capital and Equipment Requirements</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="fixedCapital"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Fixed Capital (TL) *</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        placeholder="0" 
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          <FormField
+            control={form.control}
+            name="equipmentRequired"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Equipment Required</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="List all equipment, machinery, and tools needed"
+                    rows={4}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
 
-              <FormField
-                control={form.control}
-                name="workingCapital"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Working Capital (TL) *</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        placeholder="0" 
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+          <FormField
+            control={form.control}
+            name="rawMaterials"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Raw Materials</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="List all raw materials and supplies needed"
+                    rows={4}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+        </div>
+      );
 
+    case 5:
+      return (
+        <div className="form-section bg-white dark:bg-secondary-900 p-6 rounded-lg border border-primary-200 dark:border-secondary-700">
+          <h3 className="text-xl font-semibold text-secondary-800 dark:text-secondary-200 mb-4">Space and Location Requirements</h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <FormField
               control={form.control}
-              name="equipmentRequired"
+              name="totalArea"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Equipment Required</FormLabel>
+                  <FormLabel className="text-secondary-800 dark:text-secondary-200">Total Area (m²) *</FormLabel>
                   <FormControl>
-                    <Textarea 
-                      placeholder="List all equipment, machinery, and tools needed"
-                      rows={4}
-                      {...field} 
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500 dark:text-red-400" />
                 </FormItem>
               )}
             />
 
             <FormField
               control={form.control}
-              name="rawMaterials"
+              name="width"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Raw Materials</FormLabel>
+                  <FormLabel className="text-secondary-800 dark:text-secondary-200">Width (m) *</FormLabel>
                   <FormControl>
-                    <Textarea 
-                      placeholder="List all raw materials and supplies needed"
-                      rows={4}
-                      {...field} 
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-red-500 dark:text-red-400" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="length"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-secondary-800 dark:text-secondary-200">Length (m) *</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-500 dark:text-red-400" />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="height"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-secondary-800 dark:text-secondary-200">Height (m) *</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-500 dark:text-red-400" />
                 </FormItem>
               )}
             />
           </div>
-        );
 
-      case 5:
-        return (
-          <div className="form-section">
-            <h3>Space and Location Requirements</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <FormField
-                control={form.control}
-                name="totalArea"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Total Area (m²) *</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        placeholder="0" 
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="width"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Width (m) *</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        placeholder="0" 
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="length"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Length (m) *</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        placeholder="0" 
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="height"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Height (m) *</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        placeholder="0" 
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div>
-              <FormLabel>Suitable Cities *</FormLabel>
-              <Select onValueChange={addCity}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select cities" />
-                </SelectTrigger>
-                <SelectContent>
-                  {turkishCities.map((city) => (
-                    <SelectItem key={city} value={city}>{city}</SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <div className="flex flex-wrap gap-2 mt-2">
-                {selectedCities.map((city) => (
-                  <Badge key={city} variant="secondary" className="flex items-center gap-1">
+          <div>
+            <FormLabel className="text-secondary-800 dark:text-secondary-200">Suitable Cities *</FormLabel>
+            <Select onValueChange={addCity}>
+              <SelectTrigger className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300">
+                <SelectValue placeholder="Select cities" />
+              </SelectTrigger>
+              <SelectContent className="bg-white dark:bg-secondary-900 border-primary-200 dark:border-secondary-700">
+                {turkishCities.map((city) => (
+                  <SelectItem key={city} value={city} className="text-secondary-800 dark:text-secondary-200">
                     {city}
-                    <button
-                      type="button"
-                      onClick={() => removeCity(city)}
-                      className="ml-1 hover:text-red-500"
-                    >
-                      <Minus className="h-3 w-3" />
-                    </button>
-                  </Badge>
+                  </SelectItem>
                 ))}
-              </div>
+              </SelectContent>
+            </Select>
+            <div className="flex flex-wrap gap-2 mt-2">
+              {selectedCities.map((city) => (
+                <Badge
+                  key={city}
+                  variant="secondary"
+                  className="flex items-center gap-1 bg-primary-100 dark:bg-secondary-800 text-secondary-700 dark:text-secondary-300"
+                >
+                  {city}
+                  <button
+                    type="button"
+                    onClick={() => removeCity(city)}
+                    className="ml-1 hover:text-red-500 dark:hover:text-red-400"
+                  >
+                    <Minus className="h-3 w-3" />
+                  </button>
+                </Badge>
+              ))}
             </div>
+          </div>
+
+          <FormField
+            control={form.control}
+            name="locationType"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Location Type *</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300">
+                      <SelectValue placeholder="Select location type" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white dark:bg-secondary-900 border-primary-200 dark:border-secondary-700">
+                    <SelectItem value="Private House Apartment" className="text-secondary-800 dark:text-secondary-200">Private House Apartment</SelectItem>
+                    <SelectItem value="Villa" className="text-secondary-800 dark:text-secondary-200">Villa</SelectItem>
+                    <SelectItem value="Empty Land" className="text-secondary-800 dark:text-secondary-200">Empty Land</SelectItem>
+                    <SelectItem value="Shed" className="text-secondary-800 dark:text-secondary-200">Shed</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+        </div>
+      );
+
+    case 6:
+      return (
+        <div className="form-section bg-white dark:bg-secondary-900 p-6 rounded-lg border border-primary-200 dark:border-secondary-700">
+          <h3 className="text-xl font-semibold text-secondary-800 dark:text-secondary-200 mb-4">Requirements and Permits</h3>
+
+          <FormField
+            control={form.control}
+            name="basicRequirements"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Basic Requirements</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="List basic requirements for the business"
+                    rows={3}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="fuelEnergy"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Fuel & Energy Requirements</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="e.g., Electricity, Natural Gas, Diesel"
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="performanceStandards"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Performance Standards</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Describe performance standards and quality requirements"
+                    rows={3}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="authorities"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Authorities for Permits</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="List relevant authorities and permit requirements"
+                    rows={3}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <div>
+            <FormLabel className="text-secondary-800 dark:text-secondary-200">License Requirements & Steps</FormLabel>
+            <div className="space-y-2">
+              {licenseSteps.map((step, index) => (
+                <div key={index} className="flex gap-2 items-start">
+                  <span className="text-sm font-medium text-secondary-600 dark:text-secondary-400 mt-2 min-w-[60px]">
+                    Step {step.step}:
+                  </span>
+                  <Textarea
+                    placeholder="Describe this licensing step"
+                    value={step.description}
+                    onChange={(e) => updateLicenseStep(index, e.target.value)}
+                    rows={2}
+                    className="flex-1 bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() => removeLicenseStep(index)}
+                    className="mt-1 border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                  >
+                    <Minus className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+              <Button
+                type="button"
+                onClick={addLicenseStep}
+                variant="outline"
+                size="sm"
+                className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+              >
+                <Plus className="h-4 w-4 mr-2" />
+                Add License Step
+              </Button>
+            </div>
+          </div>
+        </div>
+      );
+
+    case 7:
+      return (
+        <div className="form-section bg-white dark:bg-secondary-900 p-6 rounded-lg border border-primary-200 dark:border-secondary-700">
+          <h3 className="text-xl font-semibold text-secondary-800 dark:text-secondary-200 mb-4">Personnel and Financial Projections</h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <FormField
+              control={form.control}
+              name="supervisorNeeded"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                  <FormControl>
+                    <Checkbox
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                      className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    />
+                  </FormControl>
+                  <div className="space-y-1 leading-none">
+                    <FormLabel className="text-secondary-800 dark:text-secondary-200">Supervisor Needed</FormLabel>
+                    <FormDescription className="text-secondary-600 dark:text-secondary-400">
+                      Check if a supervisor is required for this business
+                    </FormDescription>
+                  </div>
+                </FormItem>
+              )}
+            />
 
             <FormField
               control={form.control}
-              name="locationType"
+              name="employeeCount"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Location Type *</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select location type" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="Private House Apartment">Private House Apartment</SelectItem>
-                      <SelectItem value="Villa">Villa</SelectItem>
-                      <SelectItem value="Empty Land">Empty Land</SelectItem>
-                      <SelectItem value="Shed">Shed</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
+                  <FormLabel className="text-secondary-800 dark:text-secondary-200">Number of Employees *</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="number"
+                      placeholder="0"
+                      className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                      {...field}
+                      onChange={(e) => field.onChange(Number(e.target.value))}
+                    />
+                  </FormControl>
+                  <FormMessage className="text-red-500 dark:text-red-400" />
                 </FormItem>
               )}
             />
           </div>
-        );
 
-      case 6:
-        return (
-          <div className="form-section">
-            <h3>Requirements and Permits</h3>
-            
-            <FormField
-              control={form.control}
-              name="basicRequirements"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Basic Requirements</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="List basic requirements for the business"
-                      rows={3}
-                      {...field} 
+          <div>
+            <FormLabel className="text-lg font-semibold text-secondary-800 dark:text-secondary-200">Financial Projections</FormLabel>
+            <Table className="mt-4 border border-primary-200 dark:border-secondary-700">
+              <TableHeader>
+                <TableRow className="bg-primary-100 dark:bg-secondary-800">
+                  <TableHead className="text-secondary-800 dark:text-secondary-200">Period</TableHead>
+                  <TableHead className="text-secondary-800 dark:text-secondary-200">Revenue (TL)</TableHead>
+                  <TableHead className="text-secondary-800 dark:text-secondary-200">Net Profit (TL)</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow className="bg-white dark:bg-secondary-900">
+                  <TableCell className="text-secondary-800 dark:text-secondary-200">Weekly</TableCell>
+                  <TableCell>
+                    <FormField
+                      control={form.control}
+                      name="weeklyRevenue"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="0"
+                              className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                              {...field}
+                              onChange={(e) => field.onChange(Number(e.target.value))}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-500 dark:text-red-400" />
+                        </FormItem>
+                      )}
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="fuelEnergy"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Fuel & Energy Requirements</FormLabel>
-                  <FormControl>
-                    <Input placeholder="e.g., Electricity, Natural Gas, Diesel" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="performanceStandards"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Performance Standards</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="Describe performance standards and quality requirements"
-                      rows={3}
-                      {...field} 
+                  </TableCell>
+                  <TableCell>
+                    <FormField
+                      control={form.control}
+                      name="weeklyProfit"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="0"
+                              className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                              {...field}
+                              onChange={(e) => field.onChange(Number(e.target.value))}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-500 dark:text-red-400" />
+                        </FormItem>
+                      )}
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="authorities"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Authorities for Permits</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="List relevant authorities and permit requirements"
-                      rows={3}
-                      {...field} 
+                  </TableCell>
+                </TableRow>
+                <TableRow className="bg-white dark:bg-secondary-900">
+                  <TableCell className="text-secondary-800 dark:text-secondary-200">Monthly</TableCell>
+                  <TableCell>
+                    <FormField
+                      control={form.control}
+                      name="monthlyRevenue"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="0"
+                              className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                              {...field}
+                              onChange={(e) => field.onChange(Number(e.target.value))}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-500 dark:text-red-400" />
+                        </FormItem>
+                      )}
                     />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div>
-              <FormLabel>License Requirements & Steps</FormLabel>
-              <div className="space-y-2">
-                {licenseSteps.map((step, index) => (
-                  <div key={index} className="flex gap-2 items-start">
-                    <span className="text-sm font-medium text-gray-600 mt-2 min-w-[60px]">
-                      Step {step.step}:
-                    </span>
-                    <Textarea
-                      placeholder="Describe this licensing step"
-                      value={step.description}
-                      onChange={(e) => updateLicenseStep(index, e.target.value)}
-                      rows={2}
-                      className="flex-1"
+                  </TableCell>
+                  <TableCell>
+                    <FormField
+                      control={form.control}
+                      name="monthlyProfit"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="0"
+                              className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                              {...field}
+                              onChange={(e) => field.onChange(Number(e.target.value))}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-500 dark:text-red-400" />
+                        </FormItem>
+                      )}
                     />
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      onClick={() => removeLicenseStep(index)}
-                      className="mt-1"
-                    >
-                      <Minus className="h-4 w-4" />
-                    </Button>
-                  </div>
-                ))}
-                <Button type="button" onClick={addLicenseStep} variant="outline" size="sm">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Add License Step
-                </Button>
-              </div>
+                  </TableCell>
+                </TableRow>
+                <TableRow className="bg-white dark:bg-secondary-900">
+                  <TableCell className="text-secondary-800 dark:text-secondary-200">Annual</TableCell>
+                  <TableCell>
+                    <FormField
+                      control={form.control}
+                      name="annualRevenue"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="0"
+                              className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                              {...field}
+                              onChange={(e) => field.onChange(Number(e.target.value))}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-500 dark:text-red-400" />
+                        </FormItem>
+                      )}
+                    />
+                  </TableCell>
+                  <TableCell>
+                    <FormField
+                      control={form.control}
+                      name="annualProfit"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <Input
+                              type="number"
+                              placeholder="0"
+                              className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                              {...field}
+                              onChange={(e) => field.onChange(Number(e.target.value))}
+                            />
+                          </FormControl>
+                          <FormMessage className="text-red-500 dark:text-red-400" />
+                        </FormItem>
+                      )}
+                    />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+      );
+
+    case 8:
+      return (
+        <div className="form-section bg-white dark:bg-secondary-900 p-6 rounded-lg border border-primary-200 dark:border-secondary-700">
+          <h3 className="text-xl font-semibold text-secondary-800 dark:text-secondary-200 mb-4">Banking and Product Information</h3>
+
+          <FormField
+            control={form.control}
+            name="bankingFacilities"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Banking Facilities</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Describe banking facilities and financial services needed"
+                    rows={3}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="repaymentSchedule"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Repayment Schedule</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Describe expected repayment schedule for loans or investments"
+                    rows={3}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="productDescription"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Product Shape/Size Description</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Describe the product shape, size, and specifications"
+                    rows={4}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
+
+          {/* Product Images Upload Placeholder */}
+          <div>
+            <FormLabel className="text-secondary-800 dark:text-secondary-200">Product Photos</FormLabel>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="border-2 border-dashed border-primary-200 dark:border-secondary-700 rounded-lg p-6 text-center bg-white dark:bg-secondary-900"
+                >
+                  <Upload className="h-8 w-8 text-primary-500 dark:text-primary-300 mx-auto mb-2" />
+                  <p className="text-sm text-secondary-600 dark:text-secondary-400 mb-2">Product Photo {i}</p>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                  >
+                    <Upload className="h-4 w-4 mr-2" />
+                    Upload
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="ml-2 text-secondary-600 dark:text-secondary-400 hover:text-primary-500 dark:hover:text-primary-300"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Download
+                  </Button>
+                </div>
+              ))}
             </div>
           </div>
-        );
 
-      case 7:
-        return (
-          <div className="form-section">
-            <h3>Personnel and Financial Projections</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-              <FormField
-                control={form.control}
-                name="supervisorNeeded"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                    <FormControl>
-                      <Checkbox 
-                        checked={field.value} 
-                        onCheckedChange={field.onChange} 
-                      />
-                    </FormControl>
-                    <div className="space-y-1 leading-none">
-                      <FormLabel>Supervisor Needed</FormLabel>
-                      <FormDescription>
-                        Check if a supervisor is required for this business
-                      </FormDescription>
-                    </div>
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="employeeCount"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Number of Employees *</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="number" 
-                        placeholder="0" 
-                        {...field}
-                        onChange={(e) => field.onChange(Number(e.target.value))}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div>
-              <FormLabel className="text-lg font-semibold">Financial Projections</FormLabel>
-              <Table className="mt-4">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Period</TableHead>
-                    <TableHead>Revenue (TL)</TableHead>
-                    <TableHead>Net Profit (TL)</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>Weekly</TableCell>
-                    <TableCell>
-                      <FormField
-                        control={form.control}
-                        name="weeklyRevenue"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input 
-                                type="number" 
-                                placeholder="0" 
-                                {...field}
-                                onChange={(e) => field.onChange(Number(e.target.value))}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <FormField
-                        control={form.control}
-                        name="weeklyProfit"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input 
-                                type="number" 
-                                placeholder="0" 
-                                {...field}
-                                onChange={(e) => field.onChange(Number(e.target.value))}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Monthly</TableCell>
-                    <TableCell>
-                      <FormField
-                        control={form.control}
-                        name="monthlyRevenue"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input 
-                                type="number" 
-                                placeholder="0" 
-                                {...field}
-                                onChange={(e) => field.onChange(Number(e.target.value))}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <FormField
-                        control={form.control}
-                        name="monthlyProfit"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input 
-                                type="number" 
-                                placeholder="0" 
-                                {...field}
-                                onChange={(e) => field.onChange(Number(e.target.value))}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    </TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Annual</TableCell>
-                    <TableCell>
-                      <FormField
-                        control={form.control}
-                        name="annualRevenue"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input 
-                                type="number" 
-                                placeholder="0" 
-                                {...field}
-                                onChange={(e) => field.onChange(Number(e.target.value))}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <FormField
-                        control={form.control}
-                        name="annualProfit"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormControl>
-                              <Input 
-                                type="number" 
-                                placeholder="0" 
-                                {...field}
-                                onChange={(e) => field.onChange(Number(e.target.value))}
-                              />
-                            </FormControl>
-                          </FormItem>
-                        )}
-                      />
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
+          {/* Educational Videos Placeholder */}
+          <div>
+            <FormLabel className="text-secondary-800 dark:text-secondary-200">Educational Videos (YouTube Links)</FormLabel>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="border-2 border-dashed border-primary-200 dark:border-secondary-700 rounded-lg p-6 text-center bg-white dark:bg-secondary-900"
+                >
+                  <FileText className="h-8 w-8 text-primary-500 dark:text-primary-300 mx-auto mb-2" />
+                  <p className="text-sm text-secondary-600 dark:text-secondary-400 mb-2">Educational Video {i}</p>
+                  <Input
+                    placeholder="YouTube URL"
+                    className="mb-2 bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                  />
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="text-secondary-600 dark:text-secondary-400 hover:text-primary-500 dark:hover:text-primary-300"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Download
+                  </Button>
+                </div>
+              ))}
             </div>
           </div>
-        );
 
-      case 8:
-        return (
-          <div className="form-section">
-            <h3>Banking and Product Information</h3>
-            
-            <FormField
-              control={form.control}
-              name="bankingFacilities"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Banking Facilities</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="Describe banking facilities and financial services needed"
-                      rows={3}
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <FormField
+            control={form.control}
+            name="sitePlan"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-secondary-800 dark:text-secondary-200">Production Unit Site Plan</FormLabel>
+                <FormControl>
+                  <Textarea
+                    placeholder="Describe the site plan and layout of the production unit"
+                    rows={4}
+                    className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-red-500 dark:text-red-400" />
+              </FormItem>
+            )}
+          />
 
-            <FormField
-              control={form.control}
-              name="repaymentSchedule"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Repayment Schedule</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="Describe expected repayment schedule for loans or investments"
-                      rows={3}
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="productDescription"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Product Shape/Size Description</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="Describe the product shape, size, and specifications"
-                      rows={4}
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Product Images Upload Placeholder */}
-            <div>
-              <FormLabel>Product Photos</FormLabel>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                    <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-500 mb-2">Product Photo {i}</p>
-                    <Button type="button" variant="outline" size="sm">
-                      <Upload className="h-4 w-4 mr-2" />
-                      Upload
-                    </Button>
-                    <Button type="button" variant="ghost" size="sm" className="ml-2">
-                      <Download className="h-4 w-4 mr-2" />
-                      Download
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Educational Videos Placeholder */}
-            <div>
-              <FormLabel>Educational Videos (YouTube Links)</FormLabel>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                    <FileText className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-500 mb-2">Educational Video {i}</p>
-                    <Input placeholder="YouTube URL" className="mb-2" />
-                    <Button type="button" variant="ghost" size="sm">
-                      <Download className="h-4 w-4 mr-2" />
-                      Download
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <FormField
-              control={form.control}
-              name="sitePlan"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Production Unit Site Plan</FormLabel>
-                  <FormControl>
-                    <Textarea 
-                      placeholder="Describe the site plan and layout of the production unit"
-                      rows={4}
-                      {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {/* Site Plan Images Placeholder */}
-            <div>
-              <FormLabel>Site Plan Images</FormLabel>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                    <Upload className="h-8 w-8 text-gray-400 mx-auto mb-2" />
-                    <p className="text-sm text-gray-500 mb-2">Site Plan {i}</p>
-                    <Button type="button" variant="outline" size="sm">
-                      <Upload className="h-4 w-4 mr-2" />
-                      Upload
-                    </Button>
-                    <Button type="button" variant="ghost" size="sm" className="ml-2">
-                      <Download className="h-4 w-4 mr-2" />
-                      Download
-                    </Button>
-                  </div>
-                ))}
-              </div>
+          {/* Site Plan Images Placeholder */}
+          <div>
+            <FormLabel className="text-secondary-800 dark:text-secondary-200">Site Plan Images</FormLabel>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-2">
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className="border-2 border-dashed border-primary-200 dark:border-secondary-700 rounded-lg p-6 text-center bg-white dark:bg-secondary-900"
+                >
+                  <Upload className="h-8 w-8 text-primary-500 dark:text-primary-300 mx-auto mb-2" />
+                  <p className="text-sm text-secondary-600 dark:text-secondary-400 mb-2">Site Plan {i}</p>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                  >
+                    <Upload className="h-4 w-4 mr-2" />
+                    Upload
+                  </Button>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    className="ml-2 text-secondary-600 dark:text-secondary-400 hover:text-primary-500 dark:hover:text-primary-300"
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Download
+                  </Button>
+                </div>
+              ))}
             </div>
           </div>
-        );
+        </div>
+      );
 
-      default:
-        return null;
-    }
-  };
-
+    default:
+      return null;
+  }
+};
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-primary-50 dark:bg-primary-900 text-secondary-800 dark:text-secondary-200 transition-colors duration-300">
       <Header />
       
       <main className="pt-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl font-bold text-secondary-800 dark:text-secondary-200 mb-4">
               Business Information Form
             </h1>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-secondary-600 dark:text-secondary-400">
               Provide detailed information about your business to receive comprehensive guidance
             </p>
           </div>
@@ -1070,16 +1175,16 @@ export default function BusinessFormPage() {
           {/* Progress Bar */}
           <div className="mb-8">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700">
+              <span className="text-sm font-medium text-secondary-700 dark:text-secondary-300">
                 Step {step} of {totalSteps}
               </span>
-              <span className="text-sm text-gray-500">
+              <span className="text-sm text-secondary-600 dark:text-secondary-400">
                 {Math.round((step / totalSteps) * 100)}% Complete
               </span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
+            <div className="w-full bg-primary-200 dark:bg-secondary-800 rounded-full h-2">
               <div 
-                className="bg-primary h-2 rounded-full transition-all duration-300"
+                className="bg-primary-500 dark:bg-primary-600 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${(step / totalSteps) * 100}%` }}
               />
             </div>
@@ -1091,12 +1196,13 @@ export default function BusinessFormPage() {
               {renderStepContent()}
 
               {/* Navigation Buttons */}
-              <div className="flex justify-between items-center pt-6 border-t">
+              <div className="flex justify-between items-center pt-6 border-t border-primary-200 dark:border-secondary-700">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => setStep(Math.max(1, step - 1))}
                   disabled={step === 1}
+                  className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
                 >
                   Previous
                 </Button>
@@ -1106,13 +1212,18 @@ export default function BusinessFormPage() {
                     type="button"
                     variant="ghost"
                     onClick={() => console.log('Draft saved')}
+                    className="text-secondary-600 dark:text-secondary-400 hover:text-primary-500 dark:hover:text-primary-300"
                   >
                     <Save className="h-4 w-4 mr-2" />
                     Save Draft
                   </Button>
 
                   {step === totalSteps ? (
-                    <Button type="submit" size="lg">
+                    <Button 
+                      type="submit" 
+                      size="lg"
+                      className="bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
+                    >
                       <FileText className="h-5 w-5 mr-2" />
                       Submit Form
                     </Button>
@@ -1120,6 +1231,7 @@ export default function BusinessFormPage() {
                     <Button
                       type="button"
                       onClick={() => setStep(Math.min(totalSteps, step + 1))}
+                      className="bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
                     >
                       Next
                     </Button>
