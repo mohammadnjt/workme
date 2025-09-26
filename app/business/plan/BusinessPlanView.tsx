@@ -575,6 +575,7 @@ const BusinessPlanView = ({ plan, className }: BusinessPlanViewProps) => {
               <Button
                 variant="ghost"
                 size="sm"
+                disableMotion
                 className="absolute top-2 right-2 text-primary-500 dark:text-primary-300 hover:bg-primary-100/70 dark:hover:bg-secondary-800/70 backdrop-blur-sm"
                 onClick={() => window.open(plan.educational_video, '_blank')}
               >

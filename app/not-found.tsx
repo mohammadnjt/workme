@@ -20,12 +20,13 @@ export default function NotFound() {
             Let's get you back on track.
           </p>
 
-          <div className="space-y-3">
+          <div className="space-y-3 flex flex-col">
             <Button 
               asChild 
               className="w-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
             >
               <Link href="/">
+              {/* <Link href="/" prefetch={false}> */}
                 <Home className="h-4 w-4 mr-2" />
                 Go Home
               </Link>
@@ -37,6 +38,7 @@ export default function NotFound() {
               asChild
             >
               <Link href="/business">
+              {/* <Link href="/business" prefetch={false}> */}
                 <Search className="h-4 w-4 mr-2" />
                 Explore Business
               </Link>
