@@ -1,10 +1,7 @@
 import axiosInstance from 'axios';
 
-
-console.log('process.env.BASE_URL', process.env.BASE_URL)
-console.log('process.env.NEXT_PUBLIC_BASE_URL', process.env.NEXT_PUBLIC_BASE_URL)
 const useAxios = axiosInstance.create({
-    baseURL: process.env.BASE_URL ||'http://192.168.20.65:3030/api/'
+    baseURL: process.env.BASE_URL ||'https://taskina.online:3031/api/'
 });
 
 useAxios.interceptors.request.use(

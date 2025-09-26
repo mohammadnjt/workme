@@ -8,13 +8,12 @@ import FloatingAdminMenu from './admin/FloatingAdminMenu';
 
 const inter = Inter({ subsets: ['latin'] });
 
-console.log('process.env.NEXT_PUBLIC_SITE_URL',process.env.NEXT_PUBLIC_SITE_URL)
 export const metadata: Metadata = {
   title: {
     template: '%s | Work ME',
     default: 'Work ME - Business Discovery Platform for Turkey',
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'),
+  metadataBase: new URL(process.env.BASE_URL ?? 'https://taskina.online:3031/api/'),
   description: 'Discover and connect with businesses, services, and opportunities across Turkey. Find your ideal business type, access services, events, and research on Work ME platform.',
   keywords: ['business', 'Turkey', 'Ankara', 'services', 'events', 'research', 'entrepreneurship'],
   authors: [{ name: 'Work ME Team' }],
