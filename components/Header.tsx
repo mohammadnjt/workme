@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -15,14 +15,17 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useTheme } from 'next-themes';
 import { useDataStore } from '@/store/dataStore';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname();
   const router = useRouter();
   const { user } = useDataStore();
   const { clearUser } = useDataStore.getState();
+  const menuRef = useRef(null);
 
   const { setTheme, theme } = useTheme();
 
@@ -42,6 +45,18 @@ const Header = () => {
     router.push('/auth/signin');
   }
 
+  const navItemsMobile = [
+    {
+      name: "Profile",
+      href: "/auth/profile",
+      value: "Profile",
+      subItems: [
+        { name: "LogOut", action : logout  },
+        { name: "Setting", href : '/' },
+      ]
+    },
+  ];
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-primary-50/95 dark:bg-secondary-900/95 backdrop-blur-sm shadow-md border-b border-primary-200 dark:border-secondary-700 transition-colors duration-300">
@@ -59,11 +74,10 @@ const Header = () => {
                   <li key={item.name}>
                     <Link
                       href={item.href}
-                      className={`text-sm font-medium transition-colors relative ${
-                        isActive(item.href)
-                          ? 'text-primary-500 dark:text-primary-300'
-                          : 'text-secondary-800 dark:text-secondary-200 hover:text-primary-400 dark:hover:text-primary-200'
-                      }`}
+                      className={`text-sm font-medium transition-colors relative ${isActive(item.href)
+                        ? 'text-primary-500 dark:text-primary-300'
+                        : 'text-secondary-800 dark:text-secondary-200 hover:text-primary-400 dark:hover:text-primary-200'
+                        }`}
                     >
                       {item.name}
                       {isActive(item.href) && (
@@ -160,27 +174,27 @@ const Header = () => {
                     </div>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
-              </DropdownMenu> : 
-              <>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  asChild
-                  className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
-                >
-                  <Link href="/auth/signin">Sign In</Link>
-                </Button>
-                <Button
-                  size="sm"
-                  asChild
-                  className="bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
-                >
-                  <Link href="/auth/register">Register</Link>
-                </Button>
-              </>
+              </DropdownMenu> :
+                <>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    asChild
+                    className="border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                  >
+                    <Link href="/auth/signin">Sign In</Link>
+                  </Button>
+                  <Button
+                    size="sm"
+                    asChild
+                    className="bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
+                  >
+                    <Link href="/auth/register">Register</Link>
+                  </Button>
+                </>
               }
 
-              
+
             </div>
 
             {/* Mobile Menu Button */}
@@ -215,11 +229,10 @@ const Header = () => {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`block py-2 px-4 rounded-md text-sm font-medium transition-colors ${
-                      isActive(item.href)
-                        ? 'bg-primary-500 dark:bg-primary-600 text-white'
-                        : 'text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800'
-                    }`}
+                    className={`block py-2 px-4 rounded-md text-sm font-medium transition-colors ${isActive(item.href)
+                      ? 'bg-primary-500 dark:bg-primary-600 text-white'
+                      : 'text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800'
+                      }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item.name}
@@ -228,20 +241,79 @@ const Header = () => {
               </nav>
 
               <div className="mt-6 pt-6 border-t border-primary-200 dark:border-secondary-700 space-y-4">
-                <Button
-                  variant="outline"
-                  className="w-full border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
-                  asChild
-                >
-                  <Link href="/auth/signin">Sign In</Link>
-                </Button>
-                <Button
-                  className="w-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
-                  asChild
-                >
-                  
-                  <Link href="/auth/register">Register</Link>
-                </Button>
+                {user && user.id ?
+                  (
+                    <Accordion type="single" collapsible className="w-full">
+                      {navItemsMobile.map((item) => (
+                        <AccordionItem className='border-none' key={item.value} value={item.value}>
+                          <AccordionTrigger
+                            className="px-1 py-3 no-underline hover:no-underline bg-primary-50  hover:bg-primary-50 dark:bg-secondary-900 text-right"
+                          // onClick={() => setIsMobileMenuOpen(false)}
+                          >
+                            <Link
+                              href={item.href}
+                              className={`block py-2 px-4 rounded-md text-sm font-medium transition-colors ${isActive(item.href)
+                                ? 'bg-primary-500 dark:bg-primary-600 text-white'
+                                : 'text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800'
+                                }`}
+                            >
+                              {item.name}
+                            </Link>
+                          </AccordionTrigger>
+
+                          <AccordionContent className="bg-primary-50 dark:bg-secondary-900">
+                            <div className="space-y-1 space-y-reverse">
+                              {item.subItems.map((subItem) => {
+                                if (subItem.action) {
+                                  return (
+                                    <button
+                                      key={subItem.name}
+                                      onClick={subItem.action}
+                                      className="block w-full text-left py-2 px-6 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                    >
+                                      {subItem.name}
+                                    </button>
+                                  );
+                                } else {
+                                  return (
+                                    <Link
+                                      key={subItem.href}
+                                      href={subItem.href}
+                                      className="block py-2 px-6 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                                      onClick={() => setIsMobileMenuOpen(false)}
+                                    >
+                                      {subItem.name}
+                                    </Link>
+                                  );
+                                }
+                              })}
+                            </div>
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  )
+                  :
+                  (
+                    <>
+                      <Button
+                        variant="outline"
+                        className="w-full border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                        asChild
+                      >
+                        <Link href="/auth/signin">Sign In</Link>
+                      </Button>
+                      <Button
+                        className="w-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
+                        asChild
+                      >
+
+                        <Link href="/auth/register">Register</Link>
+                      </Button>
+                    </>
+                  )
+                }
+
               </div>
 
               <div className="mt-6 pt-6 border-t border-primary-200 dark:border-secondary-700">

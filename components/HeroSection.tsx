@@ -122,8 +122,8 @@ const HeroSection = () => {
 
               {/* Background decorative elements */}
               <div className="absolute -z-10 -top-4 -left-4 w-8 h-8 border-2 border-primary-200 dark:border-secondary-700 rounded-full"></div>
-              <div className="absolute -z-10 -bottom-6 -right-6 w-12 h-12 border-2 border-primary-200 dark:border-secondary-700 rounded-full"></div>
-              <div className="absolute -z-10 top-1/3 -right-8 w-6 h-6 border-2 border-primary-200 dark:border-secondary-700 rounded-full"></div>
+              {/* <div className="absolute -z-10 -bottom-6 -right-6 w-12 h-12 border-2 border-primary-200 dark:border-secondary-700 rounded-full"></div> */}
+              {/* <div className="absolute -z-10 top-1/3 -right-8 w-6 h-6 border-2 border-primary-200 dark:border-secondary-700 rounded-full"></div> */}
             </div>
           </div>
         </div>
