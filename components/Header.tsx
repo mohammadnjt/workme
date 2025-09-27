@@ -51,15 +51,15 @@ const Header = () => {
       href: "/auth/profile",
       value: "Profile",
       subItems: [
-        { name: "LogOut", action : logout  },
-        { name: "Setting", href : '/' },
+        { name: "LogOut", action: logout },
+        { name: "Setting", href: '/' },
       ]
     },
   ];
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 bg-primary-50/95 dark:bg-secondary-900/95 backdrop-blur-sm shadow-md border-b border-primary-200 dark:border-secondary-700 transition-colors duration-300">
+      <header className="fixed top-0 left-0 right-0 z-50  backdrop-blur-md shadow-md border-b border-primary-200 dark:border-secondary-700 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
@@ -176,7 +176,7 @@ const Header = () => {
                 </DropdownMenuContent>
               </DropdownMenu> :
                 <>
-                  <Button
+                  {/* <Button
                     variant="outline"
                     size="sm"
                     asChild
@@ -190,7 +190,16 @@ const Header = () => {
                     className="bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
                   >
                     <Link href="/auth/register">Register</Link>
-                  </Button>
+                  </Button> */}
+                  <div>
+                    <Link href="/auth/signin">
+                      <Button className="w-[100px] h-[48px] p-0 bg-[#01c4c6] rounded-3xl hover:bg-[#01c4c6]/90 flex items-center">
+                        <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-[15px] leading-6">
+                          sign in
+                        </span>
+                      </Button>
+                    </Link>
+                  </div>
                 </>
               }
 

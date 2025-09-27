@@ -62,10 +62,10 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-java-500 dark:bg-secondary-900  transition-colors duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <footer className="bg-java-500 dark:bg-secondary-900 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5">
           <div className='grid grid-cols-3' >
 
             {/* About Section */}
@@ -145,12 +145,12 @@ const Footer = () => {
                 <Button
                   variant="outline"
                   size='lg'
-                  className="flex w-[197px] h-[74px] p-0 border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                  className="flex w-[197px] h-[74px] p-0 dark:bg-slate-600 dark:border-slate-800 border-primary-400 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
                 >
                   <div className='flex w-full px-4 justify-between' >
                     <div className='flex flex-col items-start' >
-                      <span className='text-gray-500 text-xs' >Select Country</span>
-                      <span className='text-gray-900' >Türkiye</span>
+                      <span className='text-gray-500 dark:text-slate-300 text-xs' >Select Country</span>
+                      <span className='text-gray-900 dark:text-white' >Türkiye</span>
                     </div>
                     <div className='flex items-center justify-end'>
                       <ChevronDown color='black' className="h-3 w-3" />
@@ -158,17 +158,17 @@ const Footer = () => {
                   </div>
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-white dark:bg-secondary-900 border border-primary-200 dark:border-secondary-700">
-                <DropdownMenuItem className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800">
+              <DropdownMenuContent className="bg-white dark:bg-secondary-900 border border-primary-200 dark:border-secondary-700 p-4 rounded-lg">
+                <DropdownMenuItem className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800 p-1">
                   Türkiye
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800">
+                <DropdownMenuItem className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800 p-1">
                   United States
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800">
+                <DropdownMenuItem className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800 p-1">
                   United Kingdom
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800">
+                <DropdownMenuItem className="text-secondary-800 dark:text-secondary-200 hover:bg-primary-100 dark:hover:bg-secondary-800 p-1">
                   Germany
                 </DropdownMenuItem>
               </DropdownMenuContent>
@@ -177,11 +177,11 @@ const Footer = () => {
         </div>
 
         {/* Legal Links */}
-        <div className="pt-6 mt-6">
+        <div >
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
             <div className="flex items-center space-x-8">
-              <div className='flex flex-col gap-8' >
-                <Image src="/ISLIO-Blue.png" alt="ISLIO" width={200} height={60} />
+              <div className='flex flex-col' >
+                <Image src="/ISLIO.White.png" alt="ISLIO" width={200} height={60} />
                 <p className="text-sm text-secondary-100 dark:text-secondary-400">
                   Copyright © 2025 ISLIO rights reserved
                 </p>

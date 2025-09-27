@@ -91,6 +91,8 @@ import SectionGrid from '@/components/SectionGrid';
 
 import categoriesData from '@/data/categories.json';
 import servicesData from '@/data/services.json';
+import SectionBlog from '@/components/SectionBlog';
+
 
 const sectionItems = [
   {
@@ -118,37 +120,48 @@ export default function Home() {
   const featuredServices = servicesData.slice(0, 4);
 
   return (
-    <div className="min-h-screen bg-primary-50/70 dark:bg-primary-900/70 backdrop-blur-md text-secondary-800 dark:text-secondary-200 transition-colors duration-300">
-      <Header />
+    <div className="min-h-screen text-secondary-800 dark:text-secondary-200 transition-colors duration-300">
+      <img
+        className="absolute w-full z-0"
+        alt="Background"
+        src="/background-1.svg"
+      />
 
+      <img
+        className="absolute  w-full  z-0"
+        alt="Background"
+        src="/background.svg"
+      />
+      <Header />
       <main className="pt-16">
+
         {/* Search Section with Glassmorphism and Overlay */}
         <section
-          className="py-8 bg-primary-50/70 dark:bg-primary-900/70 backdrop-blur-md relative border-b border-primary-200 dark:border-secondary-700"
-          style={{ backgroundImage: "url('/siteCover.jpg')", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}
+          className="py-8 relative border-b"
+        // style={{ backgroundImage: "url('/siteCover.jpg')", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}
         >
-          <div className="absolute inset-0 bg-primary-900/50 dark:bg-primary-900/70"></div>
+          <div className="absolute inset-0"></div>
           <div className="relative z-10">
             <SearchBar />
           </div>
         </section>
 
         {/* Categories Section */}
-        <section className="py-8 bg-primary-100/70 dark:bg-secondary-800/70 backdrop-blur-md border-y border-primary-200 dark:border-secondary-700">
+        <section className="py-8">
           <CategoryGrid
             title="Find your ideal business type"
             items={featuredCategories}
             viewAllHref="/business/categories"
           />
         </section>
-
+        <div className="w-full h-40 bg-[linear-gradient(180deg,rgba(255,255,255,0.2)_0%,rgba(255,255,255,1)_100%)]" />
         {/* Hero Section */}
-        <section className="py-12 bg-gradient-to-r from-primary-100/70 to-primary-200/70 dark:from-primary-800/70 dark:to-primary-700/70 backdrop-blur-md border-y border-primary-200 dark:border-secondary-700">
+        <section className="py-6">
           <HeroSection />
         </section>
 
         {/* Services Section */}
-        <section className="py-8 bg-white/70 dark:bg-secondary-900/70 backdrop-blur-md border-y border-primary-200 dark:border-secondary-700">
+        <section className="py-8">
           <ServicesGrid
             title="Our Services"
             items={featuredServices}
@@ -157,8 +170,12 @@ export default function Home() {
         </section>
 
         {/* Additional Sections */}
-        <section className="py-8 bg-primary-100/70 dark:bg-secondary-800/70 backdrop-blur-md border-y border-primary-200 dark:border-secondary-700">
+        <section className="py-8">
           <SectionGrid title="Explore More" items={sectionItems} />
+        </section>
+
+        <section>
+          <SectionBlog />
         </section>
       </main>
 
