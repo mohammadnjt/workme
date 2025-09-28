@@ -137,7 +137,7 @@ export default function Home() {
 
         {/* Search Section with Glassmorphism and Overlay */}
         <section
-          className="py-8 relative border-b"
+          className="max-w-7xl py-8 relative border-b"
         // style={{ backgroundImage: "url('/siteCover.jpg')", backgroundRepeat: "no-repeat", backgroundSize: "cover" }}
         >
           <div className="absolute inset-0"></div>

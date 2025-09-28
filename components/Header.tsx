@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
@@ -17,6 +17,13 @@ import { useTheme } from 'next-themes';
 import { useDataStore } from '@/store/dataStore';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion';
 
+const navItems = [
+  { name: 'Business', href: '/business' },
+  { name: 'Services', href: '/services' },
+  { name: 'Events', href: '/events' },
+  { name: 'Research', href: '/research' },
+  { name: 'Support', href: '/support' },
+];
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,15 +34,22 @@ const Header = () => {
   const { clearUser } = useDataStore.getState();
   const menuRef = useRef(null);
 
-  const { setTheme, theme } = useTheme();
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  const navItems = [
-    { name: 'Business', href: '/business' },
-    { name: 'Services', href: '/services' },
-    { name: 'Events', href: '/events' },
-    { name: 'Research', href: '/research' },
-    { name: 'Support', href: '/support' },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const { setTheme, theme } = useTheme();
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
 
@@ -59,7 +73,10 @@ const Header = () => {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50  backdrop-blur-md shadow-md border-b border-primary-200 dark:border-secondary-700 transition-colors duration-300">
+      <header className={`${isScrolled || isMobileMenuOpen
+        ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg' 
+        : 'bg-transparent'
+      } fixed top-0 left-0 right-0 z-50 shadow-md border-b border-primary-200 dark:border-secondary-700 transition-colors duration-300`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
