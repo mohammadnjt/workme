@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Header from '@/components/Header';
@@ -62,10 +62,14 @@ export default function BusinessFormPage() {
   const [step, setStep] = useState(1);
   const [selectedCities, setSelectedCities] = useState<string[]>([]);
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  const [DraftedPlan, setDraftedPlan] = useState<any>([]);
   const [newSkill, setNewSkill] = useState('');
   const [licenseSteps, setLicenseSteps] = useState<Array<{step: number, description: string}>>([]);
 
-  const DraftedPlan = localStorage.getItem('DraftedPlan');
+  useEffect(() => {
+    setDraftedPlan(localStorage.getItem('DraftedPlan'));
+  }, []);
+
   console.log('DraftedPlan', DraftedPlan)
   const form = useForm<BusinessFormData>({
     resolver: zodResolver(businessFormSchema),

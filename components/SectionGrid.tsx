@@ -8,7 +8,8 @@ import {
   useMotionValue,
   useTransform,
   AnimatePresence,
-  useInView
+  useInView,
+  Variants
 } from "framer-motion";
 import { Card, CardContent } from './ui/card';
 import { Button } from './ui/button';
@@ -83,7 +84,7 @@ const eventCards = [
 ];
 
 // انیمیشن‌ها
-const containerVariants = {
+const containerVariants:Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -93,7 +94,7 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants:Variants = {
   hidden: { 
     opacity: 0, 
     y: 40,
@@ -112,7 +113,7 @@ const itemVariants = {
   }
 };
 
-const hoverVariants = {
+const hoverVariants:Variants = {
   hover: {
     y: -12,
     scale: 1.03,
@@ -124,7 +125,7 @@ const hoverVariants = {
   }
 };
 
-const buttonHoverVariants = {
+const buttonHoverVariants:Variants = {
   hover: {
     scale: 1.05,
     backgroundColor: "rgba(255, 255, 255, 0.2)",

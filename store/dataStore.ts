@@ -8,6 +8,7 @@ interface UserData {
   email: string | null;
   location: string | null;
   role: string | null;
+  avatar?: string | null;
 }
 
 interface DataState {
@@ -26,6 +27,7 @@ export const useDataStore = create<DataState>()(
         email: null,
         location: null,
         role: null,
+        avatar: null
       },
       setUser: (user) => set({ user }),
       clearUser: () => set({ user: { id: null, name: null, email: null, location: null, role: null } }),

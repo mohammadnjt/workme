@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, Variants } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight, Play, Users, TrendingUp } from 'lucide-react';
@@ -9,13 +9,13 @@ import CounterNumber from './ui/counterNumber';
 import { Card, CardContent } from './ui/card';
 
 // Animation variants for the card
-const cardVariants = {
+const cardVariants : Variants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } },
 };
 
 // Animation variants for the text content
-const textVariants = {
+const textVariants : Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
@@ -25,13 +25,13 @@ const textVariants = {
 };
 
 // Animation variants for individual text elements
-const textChildVariants = {
+const textChildVariants:Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } },
 };
 
 // Animation variants for the pattern image
-const patternVariants = {
+const patternVariants: Variants = {
   hidden: { opacity: 0, rotate: -10, scale: 0.8 },
   visible: {
     opacity: 1,
@@ -42,7 +42,7 @@ const patternVariants = {
 };
 
 // Animation variants for the group image
-const groupVariants = {
+const groupVariants:Variants = {
   hidden: { opacity: 0, x: 50 },
   visible: {
     opacity: 1,

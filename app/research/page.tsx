@@ -41,7 +41,8 @@ const getIconForCategory = (category: string) => {
 };
 
 const ResearchPage = () => {
-  const categories = [...new Set(researchData.map(item => item.category))];
+  // const categories = [...new Set(researchData.map(item => item.category))];
+  const categories = Array.from(new Set(researchData.map(item => item.category)));
 
   return (
     <div className="min-h-screen bg-primary-50 dark:bg-primary-900 text-secondary-800 dark:text-secondary-200 transition-colors duration-300">

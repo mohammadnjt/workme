@@ -17,9 +17,9 @@ interface MenuItem {
 const menuItems: MenuItem[] = [
   { name: 'Users Management', icon: Users, href: '/admin/users' },
   { name: 'Business Management', icon: BarChart3, href: '/admin/business' },
-  { name: 'Event Management', icon: Calendar, href: '/messages' },
-  { name: 'Research Management', icon: Microscope, href: '/email' },
-  { name: 'Service Management', icon: Wrench, href: '/settings' },
+  { name: 'Event Management', icon: Calendar, href: '/admin/events' },
+  { name: 'Research Management', icon: Microscope, href: '/admin/research' },
+  { name: 'Service Management', icon: Wrench, href: '/admin/service' },
 ];
 const targetPoints = [
   { top: 40, left: 60 },

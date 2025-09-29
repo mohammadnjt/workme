@@ -127,8 +127,10 @@ export const useVoiceSearch = (options: UseVoiceSearchOptions = {}): UseVoiceSea
 // Type declarations for Speech Recognition API
 declare global {
   interface Window {
-    SpeechRecognition: typeof SpeechRecognition;
-    webkitSpeechRecognition: typeof SpeechRecognition;
+    // SpeechRecognition: typeof SpeechRecognition;
+    // webkitSpeechRecognition: typeof SpeechRecognition;
+    SpeechRecognition: any;
+    webkitSpeechRecognition: any;
   }
 }
 

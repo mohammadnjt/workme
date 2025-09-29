@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
-import { useInView, motion } from "framer-motion";
+import { useInView, motion, Variants } from "framer-motion";
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -71,7 +71,7 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants:Variants = {
   hidden: { 
     opacity: 0, 
     y: 30,
@@ -89,7 +89,7 @@ const itemVariants = {
   }
 };
 
-const hoverVariants = {
+const hoverVariants:Variants = {
   hover: {
     y: -8,
     scale: 1.05,

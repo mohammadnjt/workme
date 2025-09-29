@@ -47,7 +47,7 @@ const BusinessMap = () => {
     const CityComponent = TurkeyStates[name];
 
     console.log('ankara', )
-    setProvince(<CityComponent onClick={({ name }) => console.log(name + ' is just clicked!')} />)
+    setProvince(<CityComponent onClick={({ name }:any) => console.log(name + ' is just clicked!')} />)
     // for (const key of Object.keys(TurkeyStates)) {
     //   console.log('key', key)
     //   const value2 = TurkeyStates[key];

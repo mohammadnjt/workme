@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
-import { useInView, motion } from "framer-motion";
+import { useInView, motion, Variants } from "framer-motion";
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, Briefcase, GraduationCap, DollarSign, Users, Package, TrendingUp, Trophy, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -84,7 +84,7 @@ const serviceCards = [
 ];
 
 // انیمیشن‌ها
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -94,7 +94,7 @@ const containerVariants = {
   }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { 
     opacity: 0, 
     y: 30,
@@ -112,7 +112,7 @@ const itemVariants = {
   }
 };
 
-const hoverVariants = {
+const hoverVariants: Variants = {
   hover: {
     y: -8,
     scale: 1.02,

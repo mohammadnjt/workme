@@ -258,7 +258,7 @@ const config: Config = {
   },
   plugins: [
     require('tailwindcss-animate'),
-    function ({ addComponents }) {
+    function ({ addComponents }:any) {
       addComponents({
         '.scrollbar-hide': {
           'scrollbar-width': 'none',

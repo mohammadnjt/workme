@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -57,7 +59,8 @@ export default function BusinessManagement() {
   const {user} = useDataStore();
   const router = useRouter();
   
-  const [businesses, setBusinesses] = useState<Business[]>([]);
+  const [businesses, setBusinesses] = useState<any>([]);
+  // const [businesses, setBusinesses] = useState<Business[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [totalPages, setTotalPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
@@ -104,9 +107,9 @@ export default function BusinessManagement() {
   const { data: businessData, error: businessError, isLoading: businessLoading } = useSWR(
     ['getBusinesses', currentPage, searchQuery, filters],
     () =>
-      useAxios<BusinessResponse>(businessApiUrl)
-        .then((res) => res.data)
-        .catch((err) => {
+      useAxios.get<BusinessResponse>(businessApiUrl)
+        .then((res:any) => res.data)
+        .catch((err:any) => {
           console.error('error getBusinesses', err);
           throw err;
         }),
@@ -116,7 +119,7 @@ export default function BusinessManagement() {
   const { data: categoryData, error: categoryError } = useSWR(
     'getCategories',
     () =>
-      useAxios<CategoryResponse>('business/categories')
+      useAxios.get('business/categories')
         .then((res) => res.data)
         .catch((err) => {
           console.error('error getCategories', err);
@@ -436,7 +439,7 @@ export default function BusinessManagement() {
                     <td colSpan={7} className="p-4 text-center">No businesses found</td>
                   </tr>
                 ) : (
-                  businesses.map((business) => (
+                  businesses.map((business:any) => (
                     <tr
                       key={business._id}
                       className="border-t border-primary-200 dark:border-secondary-700 hover:bg-primary-50/50 dark:hover:bg-secondary-800/50"

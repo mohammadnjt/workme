@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, Variants } from "framer-motion";
 import { Badge } from "./ui/badge";
 import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
@@ -11,6 +11,49 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+
+
+// انیمیشن‌ها
+const containerVariants:Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.2
+        }
+    }
+};
+
+const itemVariants: Variants = {
+    hidden: { 
+        opacity: 0, 
+        y: 40,
+        scale: 0.9
+    },
+    visible: {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        transition: {
+            type: "spring",
+            stiffness: 80,
+            damping: 15,
+            duration: 0.8
+        }
+    }
+};
+
+const hoverVariants:Variants = {
+    hover: {
+        y: -8,
+        scale: 1.03,
+        transition: {
+            type: "spring",
+            stiffness: 400,
+            damping: 10
+        }
+    }
+};
 
 const SectionBlog: React.FC = () => {
     const ref = useRef(null);
@@ -61,47 +104,6 @@ const SectionBlog: React.FC = () => {
         }
     ];
 
-    // انیمیشن‌ها
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2
-            }
-        }
-    };
-
-    const itemVariants = {
-        hidden: { 
-            opacity: 0, 
-            y: 40,
-            scale: 0.9
-        },
-        visible: {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            transition: {
-                type: "spring",
-                stiffness: 80,
-                damping: 15,
-                duration: 0.8
-            }
-        }
-    };
-
-    const hoverVariants = {
-        hover: {
-            y: -8,
-            scale: 1.03,
-            transition: {
-                type: "spring",
-                stiffness: 400,
-                damping: 10
-            }
-        }
-    };
 
     return (
         <section 

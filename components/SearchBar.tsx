@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, Variants } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import {
@@ -15,13 +15,13 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
 // Animation variants for the section
-const sectionVariants = {
+const sectionVariants:Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.5, ease: 'easeOut' } },
 };
 
 // Animation variants for the title
-const titleVariants = {
+const titleVariants:Variants = {
   hidden: { opacity: 0, width: 0 },
   visible: {
     opacity: 1,
@@ -35,19 +35,19 @@ const titleVariants = {
 };
 
 // Animation variants for individual characters in the title
-const charVariants = {
+const charVariants:Variants = {
   hidden: { opacity: 0, x: -10 },
   visible: { opacity: 1, x: 0 },
 };
 
 // Animation variants for the description
-const descriptionVariants = {
+const descriptionVariants:Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut', delay: 0.8 } },
 };
 
 // Animation variants for the search bar
-const searchBarVariants = {
+const searchBarVariants:Variants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: {
     opacity: 1,
@@ -57,7 +57,7 @@ const searchBarVariants = {
 };
 
 // Animation variants for dropdowns and button
-const inputVariants = {
+const inputVariants:Variants = {
   hidden: { opacity: 0, x: -20 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: 'easeOut' } },
 };
