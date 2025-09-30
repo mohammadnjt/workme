@@ -1,6 +1,5 @@
-/* eslint-disable */
-
 'use client';
+/* eslint-disable */
 
 import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
@@ -267,7 +266,7 @@ export default function BusinessManagement() {
     });
   };
 
-  if(user.role !== 'admin') return router.push('/');
+  // if(user.role !== 'admin') return router.push('/');
 
   return (
     <div className="min-h-screen bg-primary-50/70 dark:bg-primary-900/70 backdrop-blur-md text-secondary-800 dark:text-secondary-200 transition-colors duration-300 p-6">

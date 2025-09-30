@@ -73,7 +73,8 @@ export default function BusinessFormPage() {
   console.log('DraftedPlan', DraftedPlan)
   const form = useForm<BusinessFormData>({
     resolver: zodResolver(businessFormSchema),
-    defaultValues: DraftedPlan ? JSON.parse(DraftedPlan) : {
+    // defaultValues: DraftedPlan ? JSON.parse(DraftedPlan) : {
+    defaultValues: {
       businessName: '',
       businessBrief: '',
       skillsRequired: [],
@@ -1176,7 +1177,7 @@ export default function BusinessFormPage() {
   }
 };
 
-  if(user.role !== 'admin') return router.push('/');
+  // if(user.role !== 'admin') return router.push('/');
 
   return (
     <div className="min-h-screen bg-primary-50 dark:bg-primary-900 text-secondary-800 dark:text-secondary-200 transition-colors duration-300">
