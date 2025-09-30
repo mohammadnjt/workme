@@ -89,7 +89,7 @@ const FloatingAdminMenu = () => {
         
       > 
         <Button
-          className="absolute pointer-events-auto drag-handle w-16 h-16 left-1/4 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary-500 dark:bg-primary-600 text-white flex items-center justify-center shadow-lg hover:bg-primary-600 dark:hover:bg-primary-700 transition-colors duration-200"
+          className="absolute pointer-events-auto drag-handle w-16 h-16 left-1/4 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-java-500 dark:bg-java-600 text-white flex items-center justify-center shadow-lg hover:bg-primary-600 dark:hover:bg-primary-700 transition-colors duration-200"
           onClick={toggleMenu}
           aria-label="Toggle Radial Menu"
           disableMotion

@@ -227,7 +227,7 @@ const SearchBar = () => {
             <motion.div variants={inputVariants} className="w-full sm:w-auto px-2">
               <Button
                 type="submit"
-                className="w-full sm:w-[120px] h-12 sm:h-14 bg-[#01c4c6] rounded-lg hover:bg-[#01c4c6]/90 flex items-center justify-center gap-2"
+                className="w-full sm:w-[120px] h-12 sm:h-14 bg-java-500 rounded-lg hover:bg-java-500/90 flex items-center justify-center gap-2"
               >
                 <SearchIcon color="white" className="w-5 h-5" />
                 <span className="[font-family:'Poppins',Helvetica] font-medium text-white text-sm sm:text-base leading-6">

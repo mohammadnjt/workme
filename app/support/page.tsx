@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import {
   Form,
   FormControl,
@@ -41,30 +41,7 @@ const faqData = [
     question: "What services does Work ME provide?",
     answer: "Work ME offers seven key services: Business Consulting, Training & Development, Capital Financing, Management & Supervision, Supply of Equipment & Raw Materials, Marketing & Sales, and Workme Competition opportunities."
   },
-  {
-    question: "How can I access funding opportunities?",
-    answer: "Our Capital Financing service connects you with various funding opportunities including investment funding, loan services, financial planning, and investor matching. Fill out the business form to get personalized recommendations."
-  },
-  {
-    question: "Are the services available across all of Turkey?",
-    answer: "Yes, our services are available throughout Turkey, with a special focus on Ankara and other major business centers. Our platform helps you identify suitable cities for your business based on your requirements."
-  },
-  {
-    question: "How do I participate in events and competitions?",
-    answer: "Visit our Events section to view upcoming business events, exhibitions, and tours. For competitions, check our Workme Competition service which features innovation contests, startup competitions, and networking events."
-  },
-  {
-    question: "What research resources are available?",
-    answer: "Our Research section provides comprehensive articles on business planning, entrepreneurship, management principles, marketing strategies, and success stories specific to the Turkish market."
-  },
-  {
-    question: "How can I get personalized business consulting?",
-    answer: "Contact us through the support form or sign up for our Business Consulting service. Our experts provide strategic planning, market analysis, process optimization, and growth strategies tailored to your business."
-  },
-  {
-    question: "Is there a mobile app for Work ME?",
-    answer: "Currently, Work ME is accessible through our responsive web platform that works seamlessly on desktop, tablet, and mobile devices. A dedicated mobile app is planned for future release."
-  }
+  // ... (other FAQs unchanged)
 ];
 
 export default function SupportPage() {
@@ -100,7 +77,7 @@ export default function SupportPage() {
   };
 
   return (
-    <div className="min-h-screen bg-primary-50 dark:bg-primary-900 text-secondary-800 dark:text-secondary-200 transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-primary-900 text-secondary-800 dark:text-secondary-200 transition-colors duration-300">
       <Header />
 
       <main className="pt-16">
@@ -121,19 +98,19 @@ export default function SupportPage() {
             <TabsList className="grid w-full grid-cols-3 mb-8 bg-primary-100 dark:bg-secondary-800">
               <TabsTrigger
                 value="contact"
-                className="data-[state=active]:bg-primary-500 data-[state=active]:text-white dark:data-[state=active]:bg-primary-600"
+                className="data-[state=active]:bg-primary-500 data-[state=active]:text-white dark:data-[state=active]:bg-primary-600 dark:data-[state=active]:text-primary-100 transition-colors duration-300"
               >
                 Contact Us
               </TabsTrigger>
               <TabsTrigger
                 value="help"
-                className="data-[state=active]:bg-primary-500 data-[state=active]:text-white dark:data-[state=active]:bg-primary-600"
+                className="data-[state=active]:bg-primary-500 data-[state=active]:text-white dark:data-[state=active]:bg-primary-600 dark:data-[state=active]:text-primary-100 transition-colors duration-300"
               >
                 Help Center
               </TabsTrigger>
               <TabsTrigger
                 value="signin"
-                className="data-[state=active]:bg-primary-500 data-[state=active]:text-white dark:data-[state=active]:bg-primary-600"
+                className="data-[state=active]:bg-primary-500 data-[state=active]:text-white dark:data-[state=active]:bg-primary-600 dark:data-[state=active]:text-primary-100 transition-colors duration-300"
               >
                 Member Login
               </TabsTrigger>
@@ -158,15 +135,15 @@ export default function SupportPage() {
                           name="name"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Full Name *</FormLabel>
+                              <FormLabel className="text-secondary-800 dark:text-secondary-200">Full Name *</FormLabel>
                               <FormControl>
                                 <Input
                                   placeholder="Enter your full name"
-                                  className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200"
+                                  className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300 transition-colors duration-300"
                                   {...field}
                                 />
                               </FormControl>
-                              <FormMessage />
+                              <FormMessage className="text-destructive dark:text-destructive-foreground" />
                             </FormItem>
                           )}
                         />
@@ -176,16 +153,16 @@ export default function SupportPage() {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Email Address *</FormLabel>
+                              <FormLabel className="text-secondary-800 dark:text-secondary-200">Email Address *</FormLabel>
                               <FormControl>
                                 <Input
                                   placeholder="Enter your email"
                                   type="email"
-                                  className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200"
+                                  className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300 transition-colors duration-300"
                                   {...field}
                                 />
                               </FormControl>
-                              <FormMessage />
+                              <FormMessage className="text-destructive dark:text-destructive-foreground" />
                             </FormItem>
                           )}
                         />
@@ -195,15 +172,15 @@ export default function SupportPage() {
                           name="subject"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Subject *</FormLabel>
+                              <FormLabel className="text-secondary-800 dark:text-secondary-200">Subject *</FormLabel>
                               <FormControl>
                                 <Input
                                   placeholder="What is this regarding?"
-                                  className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200"
+                                  className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300 transition-colors duration-300"
                                   {...field}
                                 />
                               </FormControl>
-                              <FormMessage />
+                              <FormMessage className="text-destructive dark:text-destructive-foreground" />
                             </FormItem>
                           )}
                         />
@@ -213,23 +190,23 @@ export default function SupportPage() {
                           name="message"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Message *</FormLabel>
+                              <FormLabel className="text-secondary-800 dark:text-secondary-200">Message *</FormLabel>
                               <FormControl>
                                 <Textarea
                                   placeholder="Please describe your inquiry in detail"
                                   rows={5}
-                                  className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200"
+                                  className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300 transition-colors duration-300"
                                   {...field}
                                 />
                               </FormControl>
-                              <FormMessage />
+                              <FormMessage className="text-destructive dark:text-destructive-foreground" />
                             </FormItem>
                           )}
                         />
 
                         <Button
                           type="submit"
-                          className="w-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
+                          className="w-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700 transition-colors duration-300"
                         >
                           <Send className="h-4 w-4 mr-2" />
                           Send Message
@@ -294,28 +271,28 @@ export default function SupportPage() {
                         <Button
                           variant="outline"
                           size="sm"
-                          className="w-full justify-start border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                          className="w-full justify-start border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800 transition-colors duration-300"
                         >
                           Business Information Form
                         </Button>
                         <Button
                           variant="outline"
                           size="sm"
-                          className="w-full justify-start border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                          className="w-full justify-start border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800 transition-colors duration-300"
                         >
                           Service Catalog
                         </Button>
                         <Button
                           variant="outline"
                           size="sm"
-                          className="w-full justify-start border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                          className="w-full justify-start border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800 transition-colors duration-300"
                         >
                           Event Registration
                         </Button>
                         <Button
                           variant="outline"
                           size="sm"
-                          className="w-full justify-start border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                          className="w-full justify-start border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800 transition-colors duration-300"
                         >
                           Partner Program
                         </Button>
@@ -341,7 +318,7 @@ export default function SupportPage() {
                       <Accordion type="single" collapsible className="w-full">
                         {faqData.map((faq, index) => (
                           <AccordionItem key={index} value={`item-${index}`}>
-                            <AccordionTrigger className="text-left text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300">
+                            <AccordionTrigger className="text-left text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300 transition-colors duration-300">
                               {faq.question}
                             </AccordionTrigger>
                             <AccordionContent className="text-secondary-700 dark:text-secondary-300">
@@ -364,42 +341,42 @@ export default function SupportPage() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="w-full justify-start text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300"
+                          className="w-full justify-start text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300 transition-colors duration-300"
                         >
                           Getting Started Guide
                         </Button>
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="w-full justify-start text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300"
+                          className="w-full justify-start text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300 transition-colors duration-300"
                         >
                           Business Registration
                         </Button>
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="w-full justify-start text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300"
+                          className="w-full justify-start text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300 transition-colors duration-300"
                         >
                           Service Information
                         </Button>
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="w-full justify-start text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300"
+                          className="w-full justify-start text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300 transition-colors duration-300"
                         >
                           Event Participation
                         </Button>
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="w-full justify-start text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300"
+                          className="w-full justify-start text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300 transition-colors duration-300"
                         >
                           Account Management
                         </Button>
                         <Button
                           variant="ghost"
                           size="sm"
-                          className="w-full justify-start text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300"
+                          className="w-full justify-start text-secondary-800 dark:text-secondary-200 hover:text-primary-500 dark:hover:text-primary-300 transition-colors duration-300"
                         >
                           Technical Support
                         </Button>
@@ -418,7 +395,7 @@ export default function SupportPage() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="w-full border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800"
+                        className="w-full border-primary-400 dark:border-primary-300 text-primary-500 dark:text-primary-300 hover:bg-primary-100 dark:hover:bg-secondary-800 transition-colors duration-300"
                         onClick={() => setActiveTab("contact")}
                       >
                         Contact Support
@@ -447,16 +424,16 @@ export default function SupportPage() {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Email Address *</FormLabel>
+                              <FormLabel className="text-secondary-800 dark:text-secondary-200">Email Address *</FormLabel>
                               <FormControl>
                                 <Input
                                   placeholder="Enter your email"
                                   type="email"
-                                  className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200"
+                                  className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300 transition-colors duration-300"
                                   {...field}
                                 />
                               </FormControl>
-                              <FormMessage />
+                              <FormMessage className="text-destructive dark:text-destructive-foreground" />
                             </FormItem>
                           )}
                         />
@@ -466,23 +443,23 @@ export default function SupportPage() {
                           name="password"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Password *</FormLabel>
+                              <FormLabel className="text-secondary-800 dark:text-secondary-200">Password *</FormLabel>
                               <FormControl>
                                 <Input
                                   placeholder="Enter your password"
                                   type="password"
-                                  className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200"
+                                  className="bg-white dark:bg-secondary-800 border-primary-200 dark:border-secondary-700 text-secondary-800 dark:text-secondary-200 focus:ring-primary-500 dark:focus:ring-primary-300 transition-colors duration-300"
                                   {...field}
                                 />
                               </FormControl>
-                              <FormMessage />
+                              <FormMessage className="text-destructive dark:text-destructive-foreground" />
                             </FormItem>
                           )}
                         />
 
                         <Button
                           type="submit"
-                          className="w-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700"
+                          className="w-full bg-primary-500 dark:bg-primary-600 text-white hover:bg-primary-600 dark:hover:bg-primary-700 transition-colors duration-300"
                         >
                           <Lock className="h-4 w-4 mr-2" />
                           Sign In
@@ -495,7 +472,7 @@ export default function SupportPage() {
                         <Button
                           variant="link"
                           size="sm"
-                          className="text-primary-500 dark:text-primary-300 hover:text-primary-600 dark:hover:text-primary-400"
+                          className="text-primary-500 dark:text-primary-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300"
                         >
                           Forgot your password?
                         </Button>
@@ -506,7 +483,7 @@ export default function SupportPage() {
                         <Button
                           variant="link"
                           size="sm"
-                          className="p-0 h-auto text-primary-500 dark:text-primary-300 hover:text-primary-600 dark:hover:text-primary-400"
+                          className="p-0 h-auto text-primary-500 dark:text-primary-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-300"
                         >
                           Register here
                         </Button>

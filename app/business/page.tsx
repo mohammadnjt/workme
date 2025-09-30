@@ -104,7 +104,7 @@ const BusinessPage = () => {
               </div>
 
               {/* Business Information Form Link */}
-              <div className="bg-primary-100 dark:bg-secondary-800 border border-primary-200 dark:border-secondary-700 rounded-lg p-6">
+              {/* <div className="bg-primary-100 dark:bg-secondary-800 border border-primary-200 dark:border-secondary-700 rounded-lg p-6">
                 <div className="flex items-start space-x-4">
                   <div className="flex-shrink-0">
                     <FileText className="h-8 w-8 text-primary-500 dark:text-primary-300" />
@@ -141,7 +141,7 @@ const BusinessPage = () => {
                     </Button>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Quick Stats */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
